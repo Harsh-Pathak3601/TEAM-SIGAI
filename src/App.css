@@ -1,0 +1,620 @@
+/* Basic Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #fff;
+    background-color: #0d0f1a;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* Added cursor: none; for the junior team section effect to work globally */
+    cursor: none;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  /* --- Hero Section with Robot --- */
+ .hero-robot-section {
+  background-color: #e3e3e3; /* Light gray background */
+  color: #000; /* Text color for contrast */
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  padding-top: 50px; /* Increased padding for navbar */
+}
+
+.hero-robot-section .iframe-container {
+  width: 100%;
+  height: calc(100vh - 50px); /* Adjusted to match new padding */
+  overflow: hidden;
+  border-bottom: 2px solid #222;
+}
+
+.hero-robot-section .hero-content {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  background: rgba(227, 227, 227, 0.8);
+  padding: 20px 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-robot-section h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-robot-section p {
+  font-size: 1.5rem;
+  color: #000;
+  font-weight: 500;
+}
+  
+  /* --- Core Team Section (SCOPED) --- */
+ .core-team-section {
+  background-color: #030712;
+  min-height: 100vh;
+  width: 100vw; /* covers full screen width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0; /* remove side padding to use full width */
+  margin: 0;
+  overflow-x: hidden; /* prevent scroll on small screens */
+}
+
+.core-team-wrapper {
+  width: 100%; /* full width */
+  max-width: none; /* remove 1200px limit */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 4.5rem;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.section-title span {
+  color: #38BDF8;
+}
+
+.core-team-section .team-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 1200px;
+}
+
+.core-team-section .team-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.core-team-section .team-card {
+  background-color: #0B1120;
+  border-radius: 16px;
+  padding: 24px;
+  color: #F9FAFB;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid #1F2937;
+  flex-grow: 1;
+  flex-basis: 0;
+  transition: flex-grow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.core-team-section .team-card:hover {
+  flex-grow: 2.5;
+  border-color: #38BDF8;
+}
+
+.core-team-section .card-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.core-team-section .card-name {
+  font-family: 'Abril Fatface', serif;
+  font-size: 2.2rem;
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+.core-team-section .card-role {
+  font-size: 1rem;
+  color: #38BDF8;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.core-team-section .card-desc-wrapper {
+  transition: all 0.4s ease;
+  min-height: 80px;
+}
+
+.core-team-section .card-desc {
+  font-size: 0.95rem;
+  color: #D1D5DB;
+  font-weight: 300;
+  line-height: 1.6;
+  transition: opacity 0.4s ease 0.1s, max-height 0.4s ease 0.1s;
+}
+
+.core-team-section .short-desc {
+  max-height: 100px;
+  opacity: 1;
+}
+
+.core-team-section .long-desc {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.core-team-section .card-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: auto;
+  flex-shrink: 0;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.core-team-section .card-image img {
+  width: 100%; /* make image responsive full width */
+  height: auto;
+  background-color: transparent;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.core-team-section .team-card:hover .short-desc {
+  max-height: 0;
+  opacity: 0;
+}
+
+.core-team-section .team-card:hover .long-desc {
+  max-height: 400px;
+  opacity: 1;
+}
+  
+  /* --- Junior Team Section Styles (SCOPED) --- */
+ /* -------------------- GLOBAL -------------------- */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Fluid Aurora Cursor */
+#cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle,
+      rgba(217, 70, 239, 0.25),  
+      rgba(139, 92, 246, 0.18),  
+      rgba(59, 130, 246, 0.12),
+      transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+  z-index: -1;
+  mix-blend-mode: screen;
+  transition: transform 0.15s ease-out;
+}
+
+/* -------------------- JUNIOR TEAM SECTION -------------------- */
+.junior-team-section {
+  background-color: #000000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  overflow-x: hidden;
+}
+
+.junior-team-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -------------------- TEAM CARD BASE -------------------- */
+.junior-team-section .team-card {
+  perspective: 1000px;
+  transition: all 0.35s ease-in-out;
+  position: relative;
+  cursor: pointer;
+  transform-origin: center;
+}
+
+.junior-team-section .card-inner {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-in-out;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow border on hover */
+.junior-team-section .card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(45deg, #00ffff, #1d69ff);
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.junior-team-section .team-card:hover .card-inner::before {
+  opacity: 0.7;
+}
+
+/* Card image and content */
+.junior-team-section .card-image,
+.junior-team-section .card-content {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.junior-team-section .card-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 1rem;
+}
+
+/* -------------------- STATES -------------------- */
+.junior-team-section .card-active {
+  transform: scale(1.15) !important;
+  filter: blur(0) !important;
+  opacity: 1 !important;
+  z-index: 10;
+}
+
+.junior-team-section .card-inactive {
+  transform: scale(0.95);
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+.junior-team-section .card-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Smooth hover expansion */
+.junior-team-section .team-card:hover {
+  transform: scale(1.08);
+}
+
+/* -------------------- RESPONSIVE GRID -------------------- */
+@media (max-width: 1030px) {
+  .junior-team-section #team-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .junior-team-section .team-card {
+    width: 180px !important;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 660px) {
+  .junior-team-section #team-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .junior-team-section .team-card {
+    width: 180px !important;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 455px) {
+  .junior-team-section #team-container {
+    display: grid !important;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .junior-team-section .team-card {
+    width: 180px !important;
+    margin: 0 auto;
+  }
+}
+
+  /* --- Footer Styling --- */
+  .main-footer {
+    background-color: #1a1e36;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .footer-column {
+    flex: 1 1 100%;
+    min-width: 300px;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .footer-info-section {
+    background-color: #136a9c;
+  }
+  
+  .footer-map-section {
+    background-color: #1a1e36;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .footer-contact-form {
+    background-color: #1a1e36;
+  }
+  
+  .footer-map-section iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    border: none;
+    display: block;
+  }
+  
+  .main-footer h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  .footer-info-section p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .footer-info-section p i {
+    margin-right: 10px;
+    font-size: 1.1em;
+    margin-top: 3px;
+  }
+  
+  .social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-links a {
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: #9333ea;
+  }
+  
+  .footer-contact-form form .form-group {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+  }
+  
+  .footer-contact-form form input,
+  .footer-contact-form form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4a4f78;
+    background-color: #2b3052;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .footer-contact-form form .form-group,
+  .footer-contact-form form input[type="tel"] {
+    margin-bottom: 15px;
+  }
+  
+  .footer-contact-form form textarea {
+    margin-bottom: 15px;
+  }
+  
+  .footer-contact-form form button[type="submit"] {
+    background-color: #9333ea;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .footer-contact-form form button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  /* --- Desktop Styles --- */
+  @media (min-width: 992px) {
+    .footer-column {
+      flex: 1 1 30%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .footer-contact-form form .form-group {
+      flex-direction: row;
+    }
+  
+    .footer-contact-form form button[type="submit"] {
+      width: auto;
+    }
+  }
+  
+  /* Responsive adjustments for team sections */
+/* Base container */
+.core {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #282c34;
+  color: #ffffff;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Logo styling */
+.core-logo {
+  height: 40vmin;
+  width: auto;
+  pointer-events: none;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Animation for logo */
+@media (prefers-reduced-motion: no-preference) {
+  .core-logo {
+    animation: core-logo-spin infinite 20s linear;
+  }
+}
+
+/* Header section */
+.core-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(12px + 2vmin);
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Links */
+.core-link {
+  color: #61dafb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.core-link:hover {
+  color: #21a1f1;
+}
+
+/* Logo rotation animation */
+@keyframes core-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Responsive Breakpoints --- */
+
+/* Tablets (landscape & portrait) */
+@media (max-width: 900px) {
+  .core-header {
+    font-size: calc(10px + 2vmin);
+    padding: 1.5rem;
+  }
+
+  .core-logo {
+    height: 50vmin;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .core {
+    padding: 0.5rem;
+  }
+
+  .core-header {
+    font-size: calc(10px + 1.5vmin);
+    padding: 1rem;
+  }
+
+  .core-logo {
+    height: 60vmin;
+  }
+
+  .core-link {
+    font-size: 1rem;
+  }
+}
+
+    
+    /* Global */
+    .section-title {
+      font-size: 3rem;
+    }
+
+  
