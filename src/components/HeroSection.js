@@ -27,7 +27,7 @@ const HeroSection = () => {
           justify-content: space-between;
           overflow: hidden;
           padding: 60px 100px;
-          gap: 80px; /* 🔥 Adds clear space between text and robot */
+          gap: 80px;
         }
 
         .hero-text {
@@ -36,7 +36,6 @@ const HeroSection = () => {
           max-width: 550px;
         }
 
-        /* ✅ Slide-in Animation */
         @keyframes slideInLeft {
           0% {
             opacity: 0;
@@ -69,7 +68,6 @@ const HeroSection = () => {
           line-height: 1.7;
         }
 
-        /* ✅ Robot Container */
         .hero-robot {
           flex: 1.2;
           display: flex;
@@ -85,16 +83,15 @@ const HeroSection = () => {
           position: relative !important;
         }
 
-        /* 💻 Fix for screens wider than 1024px */
         @media (min-width: 1025px) {
           .hero-robot-section {
             padding-left: 120px;
             padding-right: 120px;
-            gap: 120px; /* 🧠 more spacing between text & robot */
+            gap: 120px;
           }
 
           .hero-robot {
-            transform: scale(0.95); /* ⚖️ slight scale-down for large screens */
+            transform: scale(0.95);
           }
 
           .hero-text h1 {
@@ -106,7 +103,7 @@ const HeroSection = () => {
           }
         }
 
-        /* ✅ Responsive Layout below 1024px */
+        /* ✅ Tablet */
         @media (max-width: 1024px) {
           .hero-robot-section {
             flex-direction: column;
@@ -123,27 +120,62 @@ const HeroSection = () => {
 
           .hero-robot {
             width: 100%;
-            height: 60vh;
+            height: 65vh;
           }
         }
 
+        /* ✅ Mobile Fix — robot bigger, text smaller */
         @media (max-width: 768px) {
+          .hero-robot-section {
+            flex-direction: column;
+            padding: 60px 20px 40px;
+            height: auto;
+            gap: 30px;
+          }
+
+          .hero-text {
+            text-align: center;
+            max-width: 90%;
+            margin: 0 auto;
+          }
+
           .hero-text h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
+            line-height: 1.3;
           }
 
           .hero-text p {
-            font-size: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
           }
 
           .hero-robot {
-            height: 50vh;
+            width: 100%;
+            height: 70vh;
+            transform: scale(1.6); /* 🧠 Make robot much larger */
+            transform-origin: center;
+            margin-top: -20px;
+          }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+          .hero-text h1 {
+            font-size: 1.5rem;
+          }
+
+          .hero-text p {
+            font-size: 0.9rem;
+          }
+
+          .hero-robot {
+            height: 75vh;
+            transform: scale(1.8);
           }
         }
       `}</style>
 
       <section id="home" className="hero-robot-section">
-        {/* ✅ Text */}
         <div className="hero-text">
           <h1>Meet the Minds Behind ACM SIGAI</h1>
           <p>
@@ -154,7 +186,6 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* ✅ Robot */}
         <div className="hero-robot">
           <Suspense
             fallback={
