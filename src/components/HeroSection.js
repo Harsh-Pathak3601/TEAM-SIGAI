@@ -21,61 +21,45 @@ const HeroSection = () => {
           font-family: 'Poppins', sans-serif;
           position: relative;
           width: 100%;
-          height: 100vh;
+          min-height: 100vh;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           overflow: hidden;
-          padding: 60px 100px;
-          gap: 80px;
+          padding: 40px 20px 0;
         }
 
         .hero-text {
-          flex: 1;
           z-index: 3;
-          max-width: 550px;
-          position: relative;
-        }
-
-        .hero-text h1,
-        .hero-text p {
-          animation: fadeInUp 1s ease-out forwards;
-          opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          max-width: 90%;
+          text-align: center;
+          margin-bottom: 10px;
         }
 
         .hero-text h1 {
-          font-size: 3.2rem;
+          font-size: 1.6rem;
           font-weight: 700;
-          color: #ffffff;
-          margin-bottom: 1.2rem;
-          line-height: 1.2;
+          line-height: 1.3;
+          margin-bottom: 0.8rem;
         }
 
         .hero-text p {
-          font-size: 1.2rem;
-          font-weight: 400;
+          font-size: 0.9rem;
+          line-height: 1.5;
           color: #d1d5db;
-          line-height: 1.7;
         }
 
         /* ✅ Robot Section */
         .hero-robot {
-          flex: 1.2;
+          width: 100%;
+          height: 80vh; /* 🧠 Big section height for mobile */
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 100%;
+          transform: scale(2.2); /* 🦾 Make robot BIGGER */
+          transform-origin: top center;
+          margin-top: -20px;
           z-index: 2;
         }
 
@@ -83,98 +67,78 @@ const HeroSection = () => {
           width: 100% !important;
           height: 100% !important;
           object-fit: contain;
+          position: relative !important;
+        }
+
+        /* ✨ Fade-in Animation */
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-text, .hero-robot {
+          animation: fadeIn 1.2s ease-out forwards;
         }
 
         /* 💻 Desktop View */
         @media (min-width: 1025px) {
           .hero-robot-section {
-            padding: 80px 140px;
-            gap: 120px;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 100px 120px;
+            min-height: 100vh;
           }
+
+          .hero-text {
+            text-align: left;
+            max-width: 550px;
+            margin-bottom: 0;
+          }
+
+          .hero-text h1 {
+            font-size: 3.5rem;
+          }
+
+          .hero-text p {
+            font-size: 1.2rem;
+          }
+
           .hero-robot {
-            transform: scale(0.9);
+            height: 100%;
+            transform: scale(1.1);
+            margin-top: 0;
           }
         }
 
-        /* 📱 Tablet */
+        /* 📱 Tablet View */
         @media (max-width: 1024px) {
           .hero-robot-section {
-            flex-direction: column;
-            height: auto;
             padding: 60px 40px;
-            gap: 40px;
-          }
-
-          .hero-text {
-            text-align: center;
-            max-width: 700px;
-          }
-
-          .hero-robot {
-            height: 65vh;
-            transform: scale(1.1);
-          }
-        }
-
-        /* 📱 Mobile Optimization */
-        @media (max-width: 768px) {
-          .hero-robot-section {
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 40px 20px 0;
-            height: auto;
-            text-align: center;
-          }
-
-          .hero-text {
-            max-width: 90%;
-            margin: 0 auto 20px auto;
-            z-index: 3;
           }
 
           .hero-text h1 {
-            font-size: 1.7rem;
-            line-height: 1.3;
-            margin-bottom: 0.8rem;
-          }
-
-          .hero-text p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #d3d3d3;
+            font-size: 2rem;
           }
 
           .hero-robot {
-            position: relative;
-            width: 100%;
+            transform: scale(1.5);
             height: 70vh;
-            transform: scale(1.8);
-            transform-origin: top center;
-            margin-top: -20px;
-            z-index: 2;
-          }
-
-          .hero-robot canvas {
-            position: relative;
-            top: 0;
-            object-fit: contain;
           }
         }
 
-        /* 📱 Extra Small (Phones <480px) */
+        /* 📱 Extra Small Devices */
         @media (max-width: 480px) {
           .hero-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
           }
 
           .hero-text p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
           }
 
           .hero-robot {
-            transform: scale(2);
-            height: 75vh;
+            transform: scale(2.4);
+            height: 85vh; /* 👀 Robot takes even more space */
           }
         }
       `}</style>
@@ -208,10 +172,6 @@ const HeroSection = () => {
           >
             <Spline
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              style={{
-                transform: 'scale(1.2)',
-                transformOrigin: 'center',
-              }}
             />
           </Suspense>
         </div>
