@@ -14,120 +14,154 @@ const HeroSection = () => {
   return (
     <>
       <style>{`
-        /* ✅ Base Hero Section */
+        /* 🌌 Base Hero Section */
         .hero-robot-section {
           background: radial-gradient(circle, #1a202c 0%, #0a0e1a 100%);
           color: #fff;
           font-family: 'Poppins', sans-serif;
-          position: relative;
           width: 100%;
           min-height: 100vh;
           display: flex;
-          flex-direction: column;
+          flex-direction: row; /* ✅ Text left, Robot right */
           align-items: center;
-          justify-content: flex-start;
+          justify-content: space-between;
           overflow: hidden;
-          padding: 40px 20px 0;
+          padding: 100px 120px;
         }
 
+        /* ✍️ Text Section (Left) */
         .hero-text {
+          flex: 1;
           z-index: 3;
-          max-width: 90%;
-          text-align: center;
-          margin-bottom: 10px;
+          max-width: 550px;
+          text-align: left;
+          opacity: 0;
+          animation: fadeIn 1.4s ease-out forwards;
         }
 
         .hero-text h1 {
-          font-size: 1.6rem;
+          font-size: 3.5rem;
           font-weight: 700;
-          line-height: 1.3;
-          margin-bottom: 0.8rem;
+          line-height: 1.2;
+          margin-bottom: 1.2rem;
         }
 
         .hero-text p {
-          font-size: 0.9rem;
-          line-height: 1.5;
+          font-size: 1.2rem;
+          line-height: 1.7;
           color: #d1d5db;
         }
 
-        /* ✅ Robot Section */
+        /* 🦾 Robot Section (Right) */
         .hero-robot {
-          width: 100%;
-          height: 80vh; /* 🧠 Big section height for mobile */
+          flex: 1.2;
           display: flex;
           justify-content: center;
-          align-items: center;
-          transform: scale(2.2); /* 🦾 Make robot BIGGER */
-          transform-origin: top center;
-          margin-top: -20px;
-          z-index: 2;
+          align-items: flex-start; /* Keep robot towards top */
+          height: 100%;
+          min-height: 600px;
+          max-height: 700px;
+          transform: translateY(-25px); /* ✅ Slightly move robot up */
+          animation: fadeUp 1.2s ease-out forwards;
         }
 
         .hero-robot canvas {
-          width: 100% !important;
-          height: 100% !important;
+          width: 650px !important; /* ✅ Fixed desktop size */
+          height: 650px !important;
           object-fit: contain;
-          position: relative !important;
         }
 
-        /* ✨ Fade-in Animation */
+        /* ✨ Animations */
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(-25px); }
+        }
+
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-text, .hero-robot {
-          animation: fadeIn 1.2s ease-out forwards;
+        /* 💻 Larger Screens */
+        @media (min-width: 1200px) {
+          .hero-robot canvas {
+            width: 700px !important;
+            height: 700px !important;
+          }
         }
 
-        /* 💻 Desktop View */
-        @media (min-width: 1025px) {
+        /* 📱 Tablet */
+        @media (max-width: 1024px) {
           .hero-robot-section {
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 100px 120px;
-            min-height: 100vh;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 60px 40px;
+            text-align: center;
           }
 
           .hero-text {
-            text-align: left;
-            max-width: 550px;
-            margin-bottom: 0;
-          }
-
-          .hero-text h1 {
-            font-size: 3.5rem;
-          }
-
-          .hero-text p {
-            font-size: 1.2rem;
+            order: 2;
+            text-align: center;
+            max-width: 90%;
+            margin-top: 30px;
           }
 
           .hero-robot {
-            height: 100%;
-            transform: scale(1.1);
-            margin-top: 0;
-          }
-        }
-
-        /* 📱 Tablet View */
-        @media (max-width: 1024px) {
-          .hero-robot-section {
-            padding: 60px 40px;
+            order: 1;
+            align-items: center;
+            transform: scale(1.5) translateY(0);
+            height: 70vh;
           }
 
           .hero-text h1 {
             font-size: 2rem;
           }
 
+          .hero-text p {
+            font-size: 1rem;
+          }
+        }
+
+        /* 📱 Mobile */
+        @media (max-width: 768px) {
+          .hero-robot-section {
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 40px;
+            text-align: center;
+          }
+
           .hero-robot {
-            transform: scale(1.5);
-            height: 70vh;
+            order: 1;
+            height: 80vh;
+            transform: scale(2.2);
+            transform-origin: top center;
+            margin-top: 20px;
+          }
+
+          .hero-text {
+            order: 2;
+            margin-top: -10px;
+            padding-bottom: 80px;
+          }
+
+          .hero-text h1 {
+            font-size: 1.5rem;
+          }
+
+          .hero-text p {
+            font-size: 0.9rem;
           }
         }
 
         /* 📱 Extra Small Devices */
         @media (max-width: 480px) {
+          .hero-robot {
+            transform: scale(2.4);
+            height: 85vh;
+          }
+
           .hero-text h1 {
             font-size: 1.4rem;
           }
@@ -135,15 +169,11 @@ const HeroSection = () => {
           .hero-text p {
             font-size: 0.85rem;
           }
-
-          .hero-robot {
-            transform: scale(2.4);
-            height: 85vh; /* 👀 Robot takes even more space */
-          }
         }
       `}</style>
 
       <section id="home" className="hero-robot-section">
+        {/* ✍️ Text Left */}
         <div className="hero-text">
           <h1>Meet the Minds Behind ACM SIGAI</h1>
           <p>
@@ -154,6 +184,7 @@ const HeroSection = () => {
           </p>
         </div>
 
+        {/* 🦾 Robot Right */}
         <div className="hero-robot">
           <Suspense
             fallback={
@@ -170,9 +201,7 @@ const HeroSection = () => {
               </div>
             }
           >
-            <Spline
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            />
+            <Spline scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" />
           </Suspense>
         </div>
       </section>
