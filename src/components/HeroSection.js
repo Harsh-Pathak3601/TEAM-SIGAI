@@ -22,7 +22,7 @@ const HeroSection = () => {
           width: 100%;
           min-height: 100vh;
           display: flex;
-          flex-direction: row; /* ✅ Text left, Robot right */
+          flex-direction: row;
           align-items: center;
           justify-content: space-between;
           overflow: hidden;
@@ -52,21 +52,21 @@ const HeroSection = () => {
           color: #d1d5db;
         }
 
-        /* 🦾 Robot Section (Right) */
+        /* 🤖 Robot Section (Right) */
         .hero-robot {
           flex: 1.2;
           display: flex;
           justify-content: center;
-          align-items: flex-start; /* Keep robot towards top */
+          align-items: flex-start;
           height: 100%;
           min-height: 600px;
           max-height: 700px;
-          transform: translateY(-25px); /* ✅ Slightly move robot up */
+          transform: translateY(-25px);
           animation: fadeUp 1.2s ease-out forwards;
         }
 
         .hero-robot canvas {
-          width: 650px !important; /* ✅ Fixed desktop size */
+          width: 650px !important;
           height: 650px !important;
           object-fit: contain;
         }
@@ -122,7 +122,7 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Mobile */
+        /* 📱 Mobile — FIXED SPACING (This is the replaced block) */
         @media (max-width: 768px) {
           .hero-robot-section {
             flex-direction: column;
@@ -138,11 +138,12 @@ const HeroSection = () => {
             transform: scale(2.2);
             transform-origin: top center;
             margin-top: 20px;
+            margin-bottom: 60px; /* ✅ Extra spacing below robot */
           }
 
           .hero-text {
             order: 2;
-            margin-top: -10px;
+            margin-top: 40px; /* ✅ Space above text */
             padding-bottom: 80px;
           }
 
@@ -173,6 +174,7 @@ const HeroSection = () => {
       `}</style>
 
       <section id="home" className="hero-robot-section">
+
         {/* ✍️ Text Left */}
         <div className="hero-text">
           <h1>Meet the Minds Behind ACM SIGAI</h1>
@@ -184,26 +186,13 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* 🦾 Robot Right */}
+        {/* 🤖 Robot Right */}
         <div className="hero-robot">
-          <Suspense
-            fallback={
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  height: '100%',
-                  color: '#ccc',
-                }}
-              >
-                Loading Robot...
-              </div>
-            }
-          >
+          <Suspense fallback={<div>Loading Robot...</div>}>
             <Spline scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" />
           </Suspense>
         </div>
+
       </section>
     </>
   );
