@@ -122,7 +122,7 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Mobile — FIXED SPACING (This is the replaced block) */
+        /* 📱 Mobile — EXACT 25px SPACING BELOW ROBOT */
         @media (max-width: 768px) {
           .hero-robot-section {
             flex-direction: column;
@@ -138,12 +138,12 @@ const HeroSection = () => {
             transform: scale(2.2);
             transform-origin: top center;
             margin-top: 20px;
-            margin-bottom: 60px; /* ✅ Extra spacing below robot */
+            margin-bottom: 25px; /* ✅ EXACT 25px gap between robot & text */
           }
 
           .hero-text {
             order: 2;
-            margin-top: 40px; /* ✅ Space above text */
+            margin-top: 0; /* clean start */
             padding-bottom: 80px;
           }
 
