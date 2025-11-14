@@ -20,13 +20,13 @@ const HeroSection = () => {
           color: #fff;
           font-family: 'Poppins', sans-serif;
           width: 100%;
-          min-height: 100vh;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
           overflow: hidden;
-          padding: 100px 120px;
+          padding: 80px 120px;
+          cursor: default; /* 🟩 NORMAL ARROW CURSOR */
         }
 
         /* ✍️ Text Section (Left) */
@@ -37,6 +37,7 @@ const HeroSection = () => {
           text-align: left;
           opacity: 0;
           animation: fadeIn 1.4s ease-out forwards;
+          cursor: text; /* 🟩 I-BEAM CURSOR FOR TEXT */
         }
 
         .hero-text h1 {
@@ -57,24 +58,22 @@ const HeroSection = () => {
           flex: 1.2;
           display: flex;
           justify-content: center;
-          align-items: flex-start;
-          height: 100%;
-          min-height: 600px;
-          max-height: 700px;
-          transform: translateY(-25px);
+          align-items: center;
+          max-height: 600px;
           animation: fadeUp 1.2s ease-out forwards;
+          cursor: default; 
         }
 
         .hero-robot canvas {
-          width: 650px !important;
-          height: 650px !important;
+          width: 500px !important;
+          height: 500px !important;
           object-fit: contain;
         }
 
         /* ✨ Animations */
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(-25px); }
+          to { opacity: 1; transform: translateY(0px); }
         }
 
         @keyframes fadeIn {
@@ -85,8 +84,8 @@ const HeroSection = () => {
         /* 💻 Larger Screens */
         @media (min-width: 1200px) {
           .hero-robot canvas {
-            width: 700px !important;
-            height: 700px !important;
+            width: 650px !important;
+            height: 650px !important;
           }
         }
 
@@ -103,68 +102,56 @@ const HeroSection = () => {
             order: 2;
             text-align: center;
             max-width: 90%;
-            margin-top: 30px;
+            margin-top: 25px;
           }
 
           .hero-robot {
             order: 1;
-            align-items: center;
-            transform: scale(1.5) translateY(0);
-            height: 70vh;
-          }
-
-          .hero-text h1 {
-            font-size: 2rem;
-          }
-
-          .hero-text p {
-            font-size: 1rem;
+            max-height: 380px;
           }
         }
 
-        /* 📱 Mobile — EXACT 25px SPACING BELOW ROBOT */
+        /* 📱 Mobile — FIXED NO EXTRA SPACE */
         @media (max-width: 768px) {
           .hero-robot-section {
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 40px;
-            text-align: center;
+            padding: 40px 20px;
           }
 
           .hero-robot {
-            order: 1;
-            height: 80vh;
-            transform: scale(2.2);
-            transform-origin: top center;
-            margin-top: 20px;
-            margin-bottom: 25px; /* ✅ EXACT 25px gap between robot & text */
+            max-height: 320px;
+            margin-bottom: 20px; /* perfect spacing */
           }
 
-          .hero-text {
-            order: 2;
-            margin-top: 0; /* clean start */
-            padding-bottom: 80px;
+          .hero-robot canvas {
+            width: 350px !important;
+            height: 350px !important;
           }
 
           .hero-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
           }
 
           .hero-text p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
           }
         }
 
         /* 📱 Extra Small Devices */
         @media (max-width: 480px) {
           .hero-robot {
-            transform: scale(2.4);
-            height: 85vh;
+            max-height: 280px;
+          }
+
+          .hero-robot canvas {
+            width: 300px !important;
+            height: 300px !important;
           }
 
           .hero-text h1 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
           }
 
           .hero-text p {
