@@ -26,7 +26,7 @@ const HeroSection = () => {
           justify-content: space-between;
           overflow: hidden;
           padding: 80px 120px;
-          cursor: default; /* 🟩 NORMAL ARROW CURSOR */
+          cursor: default;
         }
 
         /* ✍️ Text Section (Left) */
@@ -37,7 +37,7 @@ const HeroSection = () => {
           text-align: left;
           opacity: 0;
           animation: fadeIn 1.4s ease-out forwards;
-          cursor: text; /* 🟩 I-BEAM CURSOR FOR TEXT */
+          cursor: text;
         }
 
         .hero-text h1 {
@@ -111,7 +111,7 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Mobile — FIXED NO EXTRA SPACE */
+        /* 📱 Mobile */
         @media (max-width: 768px) {
           .hero-robot-section {
             flex-direction: column;
@@ -122,7 +122,7 @@ const HeroSection = () => {
 
           .hero-robot {
             max-height: 320px;
-            margin-bottom: 20px; /* perfect spacing */
+            margin-bottom: 20px;
           }
 
           .hero-robot canvas {
@@ -139,7 +139,7 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Extra Small Devices */
+        /* 📱 Extra Small */
         @media (max-width: 480px) {
           .hero-robot {
             max-height: 280px;
@@ -158,6 +158,18 @@ const HeroSection = () => {
             font-size: 0.85rem;
           }
         }
+
+        /* 📱 MOBILE DEVICE USING DESKTOP-SITE MODE — FIX GAP */
+        @media (max-width: 900px) and (min-aspect-ratio: 1/1) {
+          .hero-robot {
+            margin-bottom: 120px !important;
+          }
+
+          .hero-text {
+            margin-top: 40px !important;
+          }
+        }
+
       `}</style>
 
       <section id="home" className="hero-robot-section">
