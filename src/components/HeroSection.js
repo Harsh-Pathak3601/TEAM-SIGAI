@@ -29,7 +29,7 @@ const HeroSection = () => {
           cursor: default;
         }
 
-        /* ✍️ Text Section (Left) */
+        /* Text LEFT */
         .hero-text {
           flex: 1;
           z-index: 3;
@@ -38,6 +38,7 @@ const HeroSection = () => {
           opacity: 0;
           animation: fadeIn 1.4s ease-out forwards;
           cursor: text;
+          order: 1; /* Desktop order preserved */
         }
 
         .hero-text h1 {
@@ -53,7 +54,7 @@ const HeroSection = () => {
           color: #d1d5db;
         }
 
-        /* 🤖 Robot Section (Right) */
+        /* Robot RIGHT */
         .hero-robot {
           flex: 1.2;
           display: flex;
@@ -61,7 +62,8 @@ const HeroSection = () => {
           align-items: center;
           max-height: 600px;
           animation: fadeUp 1.2s ease-out forwards;
-          cursor: default; 
+          cursor: default;
+          order: 2; /* Desktop order preserved */
         }
 
         .hero-robot canvas {
@@ -81,7 +83,7 @@ const HeroSection = () => {
           to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 💻 Larger Screens */
+        /* Large Screens */
         @media (min-width: 1200px) {
           .hero-robot canvas {
             width: 650px !important;
@@ -89,40 +91,50 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Tablet */
+        /* ⭐ TABLET & MOBILE FIX — Robot first, Text below */
         @media (max-width: 1024px) {
           .hero-robot-section {
-            flex-direction: column;
-            justify-content: flex-start;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
             padding: 60px 40px;
             text-align: center;
           }
 
-          .hero-text {
-            order: 2;
-            text-align: center;
-            max-width: 90%;
-            margin-top: 25px;
+          /* Robot FIRST */
+          .hero-robot {
+            order: 1 !important;
+            margin-bottom: 40px !important;
           }
 
-          .hero-robot {
-            order: 1;
-            max-height: 380px;
+          /* Text SECOND */
+          .hero-text {
+            order: 2 !important;
+            max-width: 90%;
+            text-align: center !important;
+            margin-top: 10px !important;
+          }
+
+          .hero-robot canvas {
+            width: 420px !important;
+            height: 420px !important;
           }
         }
 
-        /* 📱 Mobile */
+        /* MOBILE */
         @media (max-width: 768px) {
           .hero-robot-section {
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             padding: 40px 20px;
           }
 
           .hero-robot {
+            order: 1 !important;
             max-height: 320px;
             margin-bottom: 20px;
+          }
+
+          .hero-text {
+            order: 2 !important;
           }
 
           .hero-robot canvas {
@@ -139,7 +151,7 @@ const HeroSection = () => {
           }
         }
 
-        /* 📱 Extra Small */
+        /* EXTRA SMALL */
         @media (max-width: 480px) {
           .hero-robot {
             max-height: 280px;
@@ -158,23 +170,11 @@ const HeroSection = () => {
             font-size: 0.85rem;
           }
         }
-
-        /* 📱 MOBILE DEVICE USING DESKTOP-SITE MODE — FIX GAP */
-        @media (max-width: 900px) and (min-aspect-ratio: 1/1) {
-          .hero-robot {
-            margin-bottom: 120px !important;
-          }
-
-          .hero-text {
-            margin-top: 40px !important;
-          }
-        }
-
       `}</style>
 
       <section id="home" className="hero-robot-section">
 
-        {/* ✍️ Text Left */}
+        {/* TEXT LEFT — stays left on desktop */}
         <div className="hero-text">
           <h1>Meet the Minds Behind ACM SIGAI</h1>
           <p>
@@ -185,7 +185,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* 🤖 Robot Right */}
+        {/* ROBOT RIGHT — stays right on desktop */}
         <div className="hero-robot">
           <Suspense fallback={<div>Loading Robot...</div>}>
             <Spline scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" />
