@@ -38,14 +38,24 @@ const HeroSection = () => {
           opacity: 0;
           animation: fadeIn 1.4s ease-out forwards;
           cursor: text;
-          order: 1; /* Desktop order preserved */
+          order: 1;
         }
 
+        /* ❗ Normal heading, no gradient */
         .hero-text h1 {
           font-size: 3.5rem;
           font-weight: 700;
           line-height: 1.2;
           margin-bottom: 1.2rem;
+          color: #ffffff;
+        }
+
+        /* 🔥 Gradient ONLY for ACM SIGAI */
+        .gradient-text {
+          background: linear-gradient(90deg, #1a73e8 0%, #4fd1c5 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 700;
         }
 
         .hero-text p {
@@ -61,9 +71,11 @@ const HeroSection = () => {
           justify-content: center;
           align-items: center;
           max-height: 600px;
+          min-height: 500px;
+          position: relative;
           animation: fadeUp 1.2s ease-out forwards;
           cursor: default;
-          order: 2; /* Desktop order preserved */
+          order: 2;
         }
 
         .hero-robot canvas {
@@ -91,7 +103,20 @@ const HeroSection = () => {
           }
         }
 
-        /* ⭐ TABLET & MOBILE FIX — Robot first, Text below */
+        /* ⭐⭐⭐ CENTER FIX for ultra-wide displays ⭐⭐⭐ */
+        @media (min-width: 1600px) {
+          .hero-robot-section {
+            justify-content: center !important;
+            gap: 120px !important;
+            padding: 100px 200px !important;
+          }
+          .hero-text,
+          .hero-robot {
+            flex: none !important;
+          }
+        }
+
+        /* ⭐ TABLET & MOBILE FIX */
         @media (max-width: 1024px) {
           .hero-robot-section {
             flex-direction: column !important;
@@ -101,13 +126,12 @@ const HeroSection = () => {
             text-align: center;
           }
 
-          /* Robot FIRST */
           .hero-robot {
             order: 1 !important;
             margin-bottom: 40px !important;
+            min-height: 420px;
           }
 
-          /* Text SECOND */
           .hero-text {
             order: 2 !important;
             max-width: 90%;
@@ -131,10 +155,7 @@ const HeroSection = () => {
             order: 1 !important;
             max-height: 320px;
             margin-bottom: 20px;
-          }
-
-          .hero-text {
-            order: 2 !important;
+            min-height: 350px;
           }
 
           .hero-robot canvas {
@@ -155,6 +176,7 @@ const HeroSection = () => {
         @media (max-width: 480px) {
           .hero-robot {
             max-height: 280px;
+            min-height: 300px;
           }
 
           .hero-robot canvas {
@@ -174,9 +196,12 @@ const HeroSection = () => {
 
       <section id="home" className="hero-robot-section">
 
-        {/* TEXT LEFT — stays left on desktop */}
+        {/* TEXT LEFT */}
         <div className="hero-text">
-          <h1>Meet the Minds Behind ACM SIGAI</h1>
+          <h1>
+            Meet the Minds Behind <span className="gradient-text">ACM SIGAI</span>
+          </h1>
+
           <p>
             We are a community of innovators exploring the world of Artificial
             Intelligence, Machine Learning, and Human–Computer Interaction. <br />
@@ -185,7 +210,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* ROBOT RIGHT — stays right on desktop */}
+        {/* ROBOT RIGHT */}
         <div className="hero-robot">
           <Suspense fallback={<div>Loading Robot...</div>}>
             <Spline scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" />
