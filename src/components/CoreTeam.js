@@ -1,702 +1,355 @@
-import React, { useState } from 'react';
+'use client';
 
-// --- Stateful TeamCard Component ---
-// We add an 'isChairperson' prop to toggle styling
-const TeamCard = ({ member, isChairperson = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  
+import React, { useState, useEffect } from 'react';
+
+/* -----------------------------
+   teamData (single array, chairperson first)
+----------------------------- */
+const teamData = [
+  {
+    name: "Rishikesh Saroj",
+    role: "Chairperson",
+    shortDesc: "Meet our exceptional Chairperson, Rishikesh Saroj! Rishikesh leads...",
+    longDesc: "Rishikesh leads the committee with clarity and strong decision-making. He keeps the team united while ensuring smooth coordination. His guidance constantly pushes the committee toward excellence.",
+    image: "Rishikesh.png",
+    linkedin: "https://linkedin.com/in/#"
+  },
+  {
+    name: "Ishan Dubey",
+    role: "Vice - Chairperson",
+    shortDesc: "Meet our outstanding Vice Chairperson, Ishan Dubey! Ishan ensures....",
+    longDesc: "Ishan ensures smooth execution of plans and supports major decisions. He strengthens coordination across all teams. His proactive approach drives consistent progress for the committee...",
+    image: "ishan.png",
+    linkedin: "https://www.linkedin.com/in/ishan-dubey-a45378322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Taran Shetty",
+    role: "Event Manager",
+    shortDesc: "Meet our brilliant Event Manager, Taran Shetty! Taran plans ...",
+    longDesc: "Taran plans and executes events with excellent coordination and structure. He handles challenges smoothly throughout every activity. His efforts make every event successful and impactful.",
+    image: "taran.png",
+    linkedin: "https://www.linkedin.com/in/taran-shetty?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Anuj Singh",
+    role: "Technical Head",
+    shortDesc: "Meet our skilled Technical Head, Anuj Singh! Anuj leads...",
+    longDesc: "Anuj leads technical development and solves complex issues efficiently. He supports smooth digital operations for every activity. His expertise elevates the committee’s technical capabilities.",
+    image: "anuj.png",
+    linkedin: "https://www.linkedin.com/in/anujsingh-ai-ml?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Mudassir Shaikh",
+    role: "Secretary",
+    shortDesc: "Meet our dedicated Secretary, Mudassir Shaikh! Mudassir manages...",
+    longDesc: "Mudassir manages communication, documentation, and coordination effectively. He keeps every activity organized and timely. His discipline ensures the committee functions seamlessly..",
+    image: "mudassir.png",
+    linkedin: "https://www.linkedin.com/in/mudassir-shaikh-292a42286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Dev Tripati",
+    role: "Sponsorship Head",
+    shortDesc: "Meet our dynamic Sponsorship Head, Dev Tripathi! Dev secures...",
+    longDesc: "Dev secures strong partnerships with confident networking and outreach. He brings valuable sponsorship support to the committee. His communication skills drive major collaboration opportunities.",
+    image: "dev.png",
+    linkedin: "https://www.linkedin.com/in/dev-tripathi-1b285328a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Kartik Bankar",
+    role: "Webmaster",
+    shortDesc: "Meet our talented Webmaster, Kartik Bankar! With his...",
+    longDesc: "With his sharp intellect and boundless creativity, Kartik effortlessly brings our web pages to life. He ensures smooth accessibility and user experience. His work maintains a strong digital identity for the club.",
+    image: "kartik.png",
+    linkedin: "https://www.linkedin.com/in/kartikbankar21?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Reva Purohit",
+    role: "Treasurer",
+    shortDesc: "Meet our responsible Treasurer, Reva Purohit! Reva manages finances...",
+    longDesc: "Reva manages finances with accuracy, transparency, and responsibility. She ensures proper budgeting for all events. Her reliability keeps the committee financially secure.",
+    image: "reva.png",
+    linkedin: "https://www.linkedin.com/in/reva-purohit-336a88355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Aniket Bhaskar",
+    role: "Public Relation Head",
+    shortDesc: "Meet our charismatic PR Head, Aniket Bhaskar! Aniket maintains ...",
+    longDesc: "Aniket maintains a positive public presence for the club through effective outreach. He builds meaningful external connections. His professionalism ensures the club is always well-represented..",
+    image: "aniket.png",
+    linkedin: "https://www.linkedin.com/in/aniket-bhaskar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  },
+  {
+    name: "Krish Vanani",
+    role: "Creative Head",
+    shortDesc: "Introducing the creative powerhouse of ACM SIGAI,Krish Vanani...",
+    longDesc: "Krish’s artistry adds color, character, and creativity to our journey. Every design he creates reflects passion, innovation, and perfection. His imagination fuels the visual identity of our committee and inspires everyone around him.",
+    image: "krish.png",
+    linkedin: "https://www.linkedin.com/in/krish-vanani-445655260?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+  }
+];
+
+/* -----------------------------
+   TeamCard Component
+----------------------------- */
+const TeamCard = ({
+  member,
+  isChairperson = false,
+  hovered = false,
+  onPointerEnter,
+  onPointerLeave,
+  onTouchStart,
+  onTouchEnd,
+  onFocus,
+  onBlur,
+  onClick,
+  onKeyDown
+}) => {
   const cardId = `team-card-desc-${member.name.replace(/\s+/g, '-').toLowerCase()}`;
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setIsOpen(!isOpen);
-    }
-  };
-
   return (
-    <div 
-      // Add the 'chairperson-card' class if the prop is true
-      className={`team-card ${isChairperson ? 'chairperson-card' : ''} ${isOpen ? 'is-open' : ''}`}
-      onClick={handleClick} 
-      onKeyDown={handleKeyDown} 
+    <div
+      className={`team-card ${isChairperson ? 'chairperson-card' : ''} ${hovered ? 'is-hovered' : ''}`}
+      onMouseEnter={onPointerEnter}
+      onMouseLeave={onPointerLeave}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
       role="button"
-      tabIndex="0"
-      aria-expanded={isOpen}
+      tabIndex={0}
+      aria-expanded={hovered}
       aria-controls={cardId}
     >
       <div className="card-content">
         <div className="card-header">
-          <div className="card-name">{member.name}</div>
+          <div className="card-name-row">
+            <div className="card-name">{member.name}</div>
+
+            <a
+              href={member.linkedin || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="linkedin-icon"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+
           <div className="card-role">{member.role}</div>
           <div className="card-toggle-icon" aria-hidden="true" />
         </div>
+
         <div className="card-desc-wrapper" id={cardId}>
           <div className="card-desc short-desc">{member.shortDesc}</div>
           <div className="card-desc long-desc">{member.longDesc}</div>
         </div>
+
         <div className="card-image">
-          <img src={member.image} alt={member.name} />
+          <img
+            src={member.image}
+            alt={member.name}
+            onError={(e) => (e.currentTarget.src = '/placeholder.svg')}
+          />
         </div>
       </div>
     </div>
   );
 };
 
+/* -----------------------------
+   CoreTeam Component
+----------------------------- */
+export default function CoreTeam() {
+  const chairperson = teamData[0];
+  const others = teamData.slice(1);
 
-// --- Main CoreTeam Component ---
-const CoreTeam = () => {
-  // This is your 10-member data structure (3-4-3)
-  const teamMembers = {
-    column1: [
-      {
-        name: "Rishikesh Saroj",
-        role: "Chairperson",
-        shortDesc: "Meet our exceptional Chairperson, Diya Manapetty! Diya's beauty is matched...",
-        longDesc: "Diya's beauty is matched by her inner grace, with kindness that deeply enriches every aspect of her work. Her dedication, resilience, and unwavering commitment drive our team forward.",
-        image: "Rishikesh.png"
+  const gridCol1 = others.slice(0, 3);
+  const gridCol2 = others.slice(3, 6);
+  const gridCol3 = others.slice(6, 9);
+
+  const [activeCard, setActiveCard] = useState(null);
+  const [devtoolsMode, setDevtoolsMode] = useState(false);
+
+  /* Detect DevTools / Touch Emulation */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const detect = () => {
+      const emulatedTouch = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+      const dockedDevtools = (window.outerWidth - window.innerWidth) > 100;
+      const isChrome = navigator.userAgent.includes("Chrome");
+
+      setDevtoolsMode(Boolean((isChrome && emulatedTouch) || dockedDevtools));
+    };
+
+    detect();
+    window.addEventListener("resize", detect);
+    return () =>
+      window.removeEventListener("resize", detect);
+  }, []);
+
+  /* Handlers */
+  const makeHandlers = (name) => {
+    if (devtoolsMode) {
+      return {
+        onClick: (e) => {
+          e.stopPropagation?.();
+          setActiveCard((prev) => (prev === name ? null : name));
+        },
+        onKeyDown: (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setActiveCard((prev) => (prev === name ? null : name));
+          }
+        }
+      };
+    }
+
+    return {
+      onPointerEnter: () => setActiveCard(name),
+      onPointerLeave: () => setActiveCard(null),
+
+      onTouchStart: (e) => {
+        e.preventDefault?.();
+        setActiveCard(name);
       },
-      {
-        name: "Ishan Dubey",
-        role: "Vice - Chairperson",
-        shortDesc: "Meet our exceptional Vice Chairperson, Satish Gupta! Satish combines sharp...",
-        longDesc: "Satish combines sharp intellect with a proactive approach to problem-solving. His leadership fosters a culture of innovation and excellence, making him an invaluable asset to our team's success.",
-        image: "ishan.png"
+
+      onTouchEnd: () => setActiveCard(null),
+
+      onFocus: () => setActiveCard(name),
+      onBlur: () => setActiveCard(null),
+
+      onClick: (e) => {
+        e.stopPropagation?.();
+        setActiveCard(name);
       },
-      {
-        name: "Mudassir Shaikh",
-        role: "Secretary",
-        shortDesc: "Introducing our exceptional Public Relations Head Saurabh Shukla! He's a...",
-        longDesc: "He's a master of communication and strategic outreach. Saurabh's ability to build strong relationships and manage our public image is crucial to our organization's growth and reputation.",
-        image: "mudassir.png"
+      onKeyDown: (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setActiveCard(name);
+        }
       }
-    ],
-    column2: [
-      {
-        name: "Reva Purohit",
-        role: "Treasurer",
-        shortDesc: "Meet our exceptional Secretary, Sagar Kanekar! Sagar's unwavering...",
-        longDesc: "Sagar's unwavering commitment and tireless work ethic make him an invaluable asset. He handles every task with unmatched efficiency, ensuring everything runs smoothly.",
-        image: "reva.png"
-      },
-      {
-        name: "Taran Shetty",
-        role: "Event Manager",
-        shortDesc: "Meet our incredible Treasurer, Saloni Parab! Saloni's blend of...",
-        longDesc: "Saloni's blend of beauty and brains makes her an outstanding treasurer. Her meticulous attention to detail and strategic financial planning ensure the fiscal health of our organization.",
-        image: "taran.png"
-      },
-      {
-        name: "Dev Tripati",
-        role: "Sponsorship Head",
-        shortDesc: "Introducing the creative powerhouse of ACM SIG AI! Shrutika Konduri...",
-        longDesc: "Whether designing stunning visuals or conceptualizing innovative campaigns, Shrutika's artistic vision and creativity are unmatched. She brings our ideas to life with flair and passion.",
-        image: "dev.png"
-      },
-      {
-        name: "Aniket Bhaskar",
-        role: "Public Relation Head",
-        shortDesc: "Meet Rohan, our social media maestro! Rohan's creative...",
-        longDesc: "Rohan's creative content and strategic engagement build our vibrant online community, connecting with our audience and amplifying our message across all platforms.",
-        image: "aniket.png"
-      }
-    ],
-    column3: [
-      {
-        name: "Anuj Singh",
-        role: "Technical Head",
-        shortDesc: "Meet our exceptional Event Manager, Akshita Chunchu! Say hello to our...",
-        longDesc: "Say hello to our Event Manager, whose expertise turns visions into unforgettable experiences. Akshita's organizational skills and creative flair are the cornerstones of our successful events.",
-        image: "anuj.png"
-      },
-      {
-        name: "Kartik Bankar",
-        role: "Webmaster",
-        shortDesc: "Meet our incredible Sponsorship Head, Rahul George!! The absolute...",
-        longDesc: "The absolute charmer, Rahul excels at building and maintaining strong partnerships. His strategic approach to sponsorship is key to our financial stability and growth.",
-        image: "kartik.png"
-      },
-      {
-        name: "Krish Vanani",
-        role: "Creative Head",
-        shortDesc: "Meet Khushi Sharma, our brilliant webmaster! With her sharp intellect...",
-        longDesc: "With her sharp intellect and skills, Khushi ensures our digital presence is flawless. She manages our website with precision, ensuring a seamless experience for our community.",
-        image: "krish.png"
-      }
-    ]
+    };
   };
 
-  // --- START: New Data Logic ---
-  // 1. Extract the Chairperson
-  const chairperson = teamMembers.column1[0];
-
-  // 2. Get all 9 other members into one array
-  const otherMembers = [
-    ...teamMembers.column1.slice(1), // 2 members
-    ...teamMembers.column2,           // 4 members
-    ...teamMembers.column3,           // 3 members
-  ];
-
-  // 3. Split the 9 members into 3 columns for the 3x3 grid
-  const gridCol1 = otherMembers.slice(0, 3);
-  const gridCol2 = otherMembers.slice(3, 6);
-  const gridCol3 = otherMembers.slice(6, 9);
-  // --- END: New Data Logic ---
-
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;500;700&family=Teko:wght@600&display=swap');
+    <div className="core-team-wrapper">
+      <div className="main-wrapper">
 
-        /* --- CSS Variables for easy theming --- */
-        .core-team-wrapper {
-          --bg-primary: #030712;
-          --bg-secondary: #0B1120;
-          --border-color: #1F2937;
-          --border-hover: #38BDF8;
-          --text-primary: #F9FAFB;
-          --text-secondary: #D1D5DB;
-          --accent-color: #38BDF8;
-          
-          --font-body: 'Poppins', sans-serif;
-          --font-heading: 'Abril Fatface', serif;
-          --font-display: 'Teko', sans-serif;
-          
-          --card-transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+        <h1 className="section-title">
+          CORE <span>TEAM</span>
+        </h1>
 
-        .core-team-wrapper {
-          font-family: var(--font-body);
-          background-color: var(--bg-primary);
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 40px 20px;
-        }
+        <div className="team-container">
 
-        .main-wrapper {
-          width: 100%;
-          max-width: 1200px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .section-title {
-          font-family: var(--font-display);
-          font-size: 4.5rem;
-          color: var(--text-primary);
-          letter-spacing: 2px;
-          margin-bottom: 40px;
-          text-align: center;
-        }
-
-        .section-title span {
-          color: var(--accent-color);
-        }
-
-        .team-container {
-          display: flex;
-          gap: 20px;
-          width: 100%;
-          /* This is the base style for the animation */
-          height: 1200px; 
-        }
-        
-        /* By default, hide the new desktop-only layouts */
-        .chairperson-container,
-        .grid-column {
-          display: none;
-        }
-        
-        #grid-3x3-container {
-          display: none; /* Hide this by default */
-        }
-
-        .team-column {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .team-card {
-          background-color: var(--bg-secondary);
-          border-radius: 16px;
-          padding: 24px;
-          color: var(--text-primary);
-          cursor: pointer;
-          overflow: hidden;
-          border: 1px solid var(--border-color);
-          /* Base styles for the animation */
-          flex-grow: 1;
-          flex-basis: 0;
-          transition: flex-grow var(--card-transition), border-color 0.3s ease, transform 0.3s ease;
-          position: relative; 
-        }
-        
-        .team-card:focus-visible {
-          outline: 2px solid var(--accent-color);
-          outline-offset: 2px;
-        }
-
-        .card-content {
-          /* Base style for the animation */
-          height: 100%;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .card-header {
-          position: relative;
-        }
-        
-        .card-toggle-icon {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 24px;
-          height: 24px;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        
-        .card-toggle-icon::before {
-          content: '';
-          border: solid var(--accent-color);
-          border-width: 0 2px 2px 0;
-          display: inline-block;
-          padding: 4px;
-          transform: rotate(45deg); 
-          transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .team-card.is-open .card-toggle-icon::before {
-          transform: rotate(-135deg); 
-        }
-
-        .card-name {
-          font-family: var(--font-heading);
-          font-size: 2.2rem;
-          line-height: 1.1;
-          font-weight: 400;
-          padding-right: 30px; 
-        }
-
-        .card-role {
-          font-size: 1rem;
-          color: var(--accent-color);
-          font-weight: 500;
-          margin-bottom: 16px;
-        }
-
-        .card-desc-wrapper {
-          transition: all 0.4s ease;
-          min-height: 80px;
-        }
-
-        .card-desc {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-          font-weight: 300;
-          line-height: 1.6;
-          transition: opacity 0.4s ease 0.1s, max-height 0.4s ease 0.1s;
-        }
-
-        .short-desc {
-          max-height: 100px;
-          opacity: 1;
-        }
-
-        .long-desc {
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-        }
-
-        .card-image {
-          width: 100%;
-          border-radius: 8px;
-          overflow: hidden;
-          /* Base style for the animation */
-          margin-top: auto;
-          flex-shrink: 0;
-          transition: all var(--card-transition);
-        }
-
-        .card-image img {
-          width: 100%;
-          /* Base style for the animation */
-          height: 100%;
-          background-color: transparent;
-          display: block;
-          object-fit: cover;
-          object-position: top center;
-        }
-        
-        /* --- START: Desktop Layout (1 + 3x3) --- */
-        @media (hover: hover) and (min-width: 901px) {
-          
-          .team-container {
-            flex-direction: column;
-            height: auto;
-            gap: 20px;
-          }
-
-          .chairperson-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-          }
-          
-          .chairperson-container .team-card {
-            width: 350px;
-            max-width: 100%;
-          }
-        
-          .grid-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            flex: 1;
-          }
-          
-          .mobile-only-column {
-            display: none;
-          }
-
-          #grid-3x3-container {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            width: 100%;
-            /* This height is CRITICAL for the 3x3 animation */
-            height: 1200px; 
-          }
-          
-          /* --- START: CHAIRPERSON CARD STYLES --- */
-          /* Horizontal expansion animation for chairperson */
-          
-          .chairperson-card {
-            flex-grow: 0 !important;
-            flex-basis: auto !important;
-            height: 400px !important;
-            width: 350px;
-            transition: width var(--card-transition), border-color 0.3s ease, box-shadow 0.3s ease;
-            overflow: visible;
-          }
-          
-          .chairperson-card .card-content {
-            height: 100% !important;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto 1fr auto;
-            transition: grid-template-columns var(--card-transition);
-          }
-          
-          .chairperson-card .card-header {
-            grid-column: 1;
-            grid-row: 1 / 3;
-          }
-          
-          .chairperson-card .card-desc-wrapper {
-            grid-column: 1;
-            grid-row: 3;
-            overflow: hidden;
-          }
-          
-          .chairperson-card .card-image {
-            grid-column: 1;
-            grid-row: 4;
-            margin-top: auto !important;
-            height: 200px;
-            flex-shrink: 0;
-            transition: all var(--card-transition);
-          }
-          
-          .chairperson-card .card-image img {
-            height: 100% !important;
-            object-fit: cover !important;
-            transition: transform var(--card-transition);
-          }
-
-          /* Hover state - expand horizontally */
-          .chairperson-card:hover {
-            width: 700px;
-            border-color: var(--accent-color);
-            box-shadow: 0 20px 60px rgba(56, 189, 248, 0.3);
-          }
-          
-          .chairperson-card:hover .card-content {
-            grid-template-columns: 1fr 1fr;
-          }
-          
-          .chairperson-card:hover .card-image {
-            grid-column: 2;
-            grid-row: 1 / 5;
-            margin-top: 0 !important;
-            height: 100%;
-            border-radius: 0 8px 8px 0;
-            margin-left: 24px;
-          }
-          
-          .chairperson-card:hover .card-image img {
-            transform: scale(1.05);
-          }
-          
-          .chairperson-card:hover .short-desc {
-            max-height: 0;
-            opacity: 0;
-          }
-
-          .chairperson-card:hover .long-desc {
-            max-height: 400px;
-            opacity: 1;
-          }
-
-          /* Accent border animation */
-          .chairperson-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent-color), #0EA5E9, var(--accent-color));
-            border-radius: 16px;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-          }
-          
-          .chairperson-card:hover::before {
-            opacity: 1;
-          }
-          
-          /* Subtle glow effect */
-          .chairperson-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            border-radius: 16px;
-          }
-          
-          .chairperson-card:hover::after {
-            opacity: 1;
-          }
-          
-          /* --- END: CHAIRPERSON CARD STYLES --- */
-
-
-          /* --- 3x3 Grid Card Styles (Unaffected) --- */
-          /* These rules apply to the 9 grid cards
-             and use the base animation styles */
-          .grid-column .team-card:hover {
-            flex-grow: 2.5;
-            border-color: var(--border-hover);
-          }
-          
-          .grid-column .team-card:hover .short-desc {
-            max-height: 0;
-            opacity: 0;
-          }
-
-          .grid-column .team-card:hover .long-desc {
-            max-height: 400px;
-            opacity: 1;
-          }
-          
-          .grid-column .team-card::after {
-            display: none;
-          }
-        }
-        /* --- END: Desktop Layout --- */
-        
-        
-        .team-card.is-open .short-desc {
-          max-height: 0;
-          opacity: 0;
-        }
-
-        .team-card.is-open .long-desc {
-          max-height: 999px;
-          opacity: 1;
-        }
-        
-
-        @media (max-width: 900px) {
-          .core-team-wrapper {
-            padding: 30px 15px;
-          }
-
-          .section-title {
-            font-size: 3.5rem;
-          }
-
-          /* This query correctly disables the animation for mobile */
-          .team-container {
-            flex-direction: column;
-            height: auto; 
-            gap: 15px;
-          }
-          
-          .mobile-only-column {
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            gap: 15px;
-          }
-
-          .team-card {
-            flex-grow: 0; 
-            flex-basis: auto; /* Disables animation */
-            transition: transform 0.2s ease-out;
-          }
-          
-          .team-card:active {
-             transform: scale(0.98);
-          }
-          
-          .card-toggle-icon {
-            opacity: 0.7;
-          }
-          .team-card:hover .card-toggle-icon {
-            opacity: 1;
-          }
-
-          .team-card:hover {
-            flex-grow: 0;
-            border-color: var(--border-color);
-          }
-
-          /* Mobile overrides for card content */
-          .card-content {
-            height: auto;
-          }
-          .card-image {
-            margin-top: 24px;
-          }
-          .card-image img {
-            height: auto;
-          }
-
-          .short-desc {
-            max-height: 100px;
-            opacity: 1;
-          }
-          
-          .long-desc {
-            max-height: 0;
-            opacity: 0;
-          }
-          
-          .team-card.is-open .short-desc {
-            max-height: 0;
-            opacity: 0;
-          }
-          .team-card.is-open .long-desc {
-            max-height: 999px;
-            opacity: 1;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .section-title {
-            font-size: 2.8rem;
-          }
-           .card-name {
-            font-size: 1.9rem;
-          }
-          .team-card {
-            padding: 20px;
-          }
-        }
-      `}</style>
-
-      <div className="core-team-wrapper">
-        <div className="main-wrapper">
-          <h1 className="section-title">CORE <span>TEAM</span></h1>
-
-          <div className="team-container">
-            
-            {/* --- START: Desktop Layout (1 + 3x3) --- */}
-
-            <div className="chairperson-container">
-              <TeamCard 
-                key={chairperson.name} 
-                member={chairperson} 
-                isChairperson={true} 
-              />
-            </div>
-
-            <div id="grid-3x3-container">
-              <div className="team-column grid-column">
-                {gridCol1.map((member, idx) => (
-                  <TeamCard key={member.name || idx} member={member} />
-                ))}
-              </div>
-
-              <div className="team-column grid-column">
-                {gridCol2.map((member, idx) => (
-                  <TeamCard key={member.name || idx} member={member} />
-                ))}
-              </div>
-
-              <div className="team-column grid-column">
-                {gridCol3.map((member, idx) => (
-                  <TeamCard key={member.name || idx} member={member} />
-                ))}
-              </div>
-            </div>
-            
-            {/* --- END: Desktop Layout --- */}
-
-
-            {/* --- START: Mobile Layout (Original 3-4-3) --- */}
-            
-            <div className="team-column mobile-only-column">
-              {teamMembers.column1.map((member, idx) => (
-                <TeamCard key={member.name || idx} member={member} />
-              ))}
-            </div>
-
-            <div className="team-column mobile-only-column">
-              {teamMembers.column2.map((member, idx) => (
-                <TeamCard key={member.name || idx} member={member} />
-              ))}
-            </div>
-
-            <div className="team-column mobile-only-column">
-              {teamMembers.column3.map((member, idx) => (
-                <TeamCard key={member.name || idx} member={member} />
-              ))}
-            </div>
-            
-            {/* --- END: Mobile Layout --- */}
-            
+          <div className="chairperson-container" role="region" aria-label="Chairperson">
+            <TeamCard
+              member={chairperson}
+              isChairperson={true}
+              hovered={activeCard === chairperson.name}
+              {...makeHandlers(chairperson.name)}
+            />
           </div>
-        </div>
-      </div>
-    </>
-  );
-};
 
-export default CoreTeam;
+          {/* Desktop 3x3 grid stays SAME */}
+          <div id="grid-3x3-container">
+            <div className="team-column grid-column" role="list">
+              {gridCol1.map((member) => (
+                <TeamCard
+                  key={member.name}
+                  member={member}
+                  hovered={activeCard === member.name}
+                  {...makeHandlers(member.name)}
+                />
+              ))}
+            </div>
+
+            <div className="team-column grid-column" role="list">
+              {gridCol2.map((member) => (
+                <TeamCard
+                  key={member.name}
+                  member={member}
+                  hovered={activeCard === member.name}
+                  {...makeHandlers(member.name)}
+                />
+              ))}
+            </div>
+
+            <div className="team-column grid-column" role="list">
+              {gridCol3.map((member) => (
+                <TeamCard
+                  key={member.name}
+                  member={member}
+                  hovered={activeCard === member.name}
+                  {...makeHandlers(member.name)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 🔥 Updated Mobile Order */}
+          <div className="team-column mobile-only-column">
+            <TeamCard
+              member={teamData.find(m => m.role === "Vice - Chairperson")}
+              hovered={activeCard === "Ishan Dubey"}
+              {...makeHandlers("Ishan Dubey")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Secretary")}
+              hovered={activeCard === "Mudassir Shaikh"}
+              {...makeHandlers("Mudassir Shaikh")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Treasurer")}
+              hovered={activeCard === "Reva Purohit"}
+              {...makeHandlers("Reva Purohit")}
+            />
+          </div>
+
+          <div className="team-column mobile-only-column">
+            <TeamCard
+              member={teamData.find(m => m.role === "Event Manager")}
+              hovered={activeCard === "Taran Shetty"}
+              {...makeHandlers("Taran Shetty")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Sponsorship Head")}
+              hovered={activeCard === "Dev Tripati"}
+              {...makeHandlers("Dev Tripati")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Public Relation Head")}
+              hovered={activeCard === "Aniket Bhaskar"}
+              {...makeHandlers("Aniket Bhaskar")}
+            />
+          </div>
+
+          <div className="team-column mobile-only-column">
+            <TeamCard
+              member={teamData.find(m => m.role === "Technical Head")}
+              hovered={activeCard === "Anuj Singh"}
+              {...makeHandlers("Anuj Singh")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Webmaster")}
+              hovered={activeCard === "Kartik Bankar"}
+              {...makeHandlers("Kartik Bankar")}
+            />
+            <TeamCard
+              member={teamData.find(m => m.role === "Creative Head")}
+              hovered={activeCard === "Krish Vanani"}
+              {...makeHandlers("Krish Vanani")}
+            />
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
+}
