@@ -18,7 +18,7 @@ const teamData = [
     name: "Ishan Dubey",
     role: "Vice - Chairperson",
     shortDesc: "Meet our outstanding Vice Chairperson, Ishan Dubey! Ishan ensures....",
-    longDesc: "Ishan ensures smooth execution of plans and supports major decisions. He strengthens coordination across all teams. His proactive approach drives consistent progress for the committee...",
+    longDesc: "Ishan ensures smooth execution of plans and supports major decisions. He strengthens coordination across all teams. His proactive approach drives consistent progress for the committee.",
     image: "ishan.png",
     linkedin: "https://www.linkedin.com/in/ishan-dubey-a45378322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
@@ -42,7 +42,7 @@ const teamData = [
     name: "Mudassir Shaikh",
     role: "Secretary",
     shortDesc: "Meet our dedicated Secretary, Mudassir Shaikh! Mudassir manages...",
-    longDesc: "Mudassir manages communication, documentation, and coordination effectively. He keeps every activity organized and timely. His discipline ensures the committee functions seamlessly..",
+    longDesc: "Mudassir manages communication, documentation, and coordination effectively. He keeps every activity organized and timely. His discipline ensures the committee functions seamlessly.",
     image: "mudassir.png",
     linkedin: "https://www.linkedin.com/in/mudassir-shaikh-292a42286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
@@ -74,7 +74,7 @@ const teamData = [
     name: "Aniket Bhaskar",
     role: "Public Relation Head",
     shortDesc: "Meet our charismatic PR Head, Aniket Bhaskar! Aniket maintains ...",
-    longDesc: "Aniket maintains a positive public presence for the club through effective outreach. He builds meaningful external connections. His professionalism ensures the club is always well-represented..",
+    longDesc: "Aniket maintains a positive public presence for the club through effective outreach. He builds meaningful external connections. His professionalism ensures the club is always well-represented.",
     image: "aniket.png",
     linkedin: "https://www.linkedin.com/in/aniket-bhaskar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
