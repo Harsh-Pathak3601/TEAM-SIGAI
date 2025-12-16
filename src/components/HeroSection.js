@@ -14,7 +14,6 @@ const HeroSection = () => {
   return (
     <>
       <style>{`
-        /* 🌌 Base Hero Section */
         .hero-robot-section {
           background: radial-gradient(circle, #1a202c 0%, #0a0e1a 100%);
           color: #fff;
@@ -40,8 +39,6 @@ const HeroSection = () => {
           cursor: text;
           order: 1;
         }
-
-        /* ❗ Normal heading, no gradient */
         .hero-text h1 {
           font-size: 3.5rem;
           font-weight: 700;
@@ -50,7 +47,6 @@ const HeroSection = () => {
           color: #ffffff;
         }
 
-        /* 🔥 Gradient ONLY for ACM SIGAI */
         .gradient-text {
           background: linear-gradient(90deg, #1a73e8 0%, #4fd1c5 100%);
           -webkit-background-clip: text;
@@ -84,7 +80,6 @@ const HeroSection = () => {
           object-fit: contain;
         }
 
-        /* ✨ Animations */
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0px); }
@@ -102,8 +97,6 @@ const HeroSection = () => {
             height: 650px !important;
           }
         }
-
-        /* ⭐⭐⭐ CENTER FIX for ultra-wide displays ⭐⭐⭐ */
         @media (min-width: 1600px) {
           .hero-robot-section {
             justify-content: center !important;
@@ -115,8 +108,6 @@ const HeroSection = () => {
             flex: none !important;
           }
         }
-
-        /* ⭐ TABLET & MOBILE FIX */
         @media (max-width: 1024px) {
           .hero-robot-section {
             flex-direction: column !important;

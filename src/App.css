@@ -28,16 +28,16 @@
   
   /* --- Hero Section with Robot --- */
  .hero-robot-section {
-  background-color: #e3e3e3; /* Light gray background */
-  color: #000; /* Text color for contrast */
+  background-color: #e3e3e3; 
+  color: #000; 
   font-family: 'Poppins', sans-serif;
   position: relative;
-  padding-top: 50px; /* Increased padding for navbar */
+  padding-top: 50px; 
 }
 
 .hero-robot-section .iframe-container {
   width: 100%;
-  height: calc(100vh - 50px); /* Adjusted to match new padding */
+  height: calc(100vh - 50px); 
   overflow: hidden;
   border-bottom: 2px solid #222;
 }
@@ -68,14 +68,8 @@
 }
   
   /* --- Core Team Section (SCOPED) --- */
-/* ===========================
-   FONTS (Kept as requested)
-=========================== */
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;500;700&family=Teko:wght@600&display=swap');
 
-/* ===========================
-   COLOR VARIABLES (Scoped)
-=========================== */
 .core-team-wrapper {
   --bg-primary:#030712;
   --bg-secondary:#0B1120;
@@ -86,10 +80,6 @@
   --accent-color:#38BDF8;
   --card-transition:0.5s cubic-bezier(0.23,1,0.32,1);
 }
-
-/* ===========================
-   GENERAL (Scoped)
-=========================== */
 .core-team-wrapper * {
   box-sizing:border-box;
 }
@@ -113,9 +103,6 @@
   align-items:center;
 }
 
-/* ===========================
-   SECTION TITLE
-=========================== */
 .core-team-wrapper .section-title{
   font-family:'Teko',sans-serif;
   font-size:4.5rem;
@@ -128,9 +115,7 @@
   color:var(--accent-color);
 }
 
-/* ===========================
-   GRID & LAYOUT
-=========================== */
+/* Grid layout */
 .core-team-wrapper .team-container{
   display:flex;
   gap:20px;
@@ -265,10 +250,7 @@
   display:flex;
   justify-content:center;
 }
-/* ===========================================
-   DESKTOP — HOVER BEHAVIOR & GRID LAYOUT
-   (Screens ≥ 901px)
-=========================================== */
+/* Desktop-specific styles */
 @media (min-width:901px){
 
   .core-team-wrapper .chairperson-card:not(.is-hovered) .card-desc-wrapper {
@@ -413,10 +395,7 @@
     opacity:1;
   }
 }
-/* ===========================================
-   MOBILE & TABLET
-   (Screens ≤ 900px)
-=========================================== */
+/* Mobile and Tablet */
 @media (max-width:900px){
   .core-team-wrapper{
     padding:30px 15px;
@@ -510,10 +489,7 @@
   }
 }
 
-/* ===========================================
-   VERY SMALL SCREENS
-   (Screens ≤ 480px)
-=========================================== */
+/* Mobile-specific styles */
 @media (max-width:480px){
   .core-team-wrapper .section-title{
     font-size:2.8rem;
@@ -524,23 +500,15 @@
   .core-team-wrapper .team-card{
     padding:20px;
   }
-}
-
-/* -------------------------
-   Cursor Behavior (Scoped)
---------------------------*/
-
-/* Default cursor inside Core Team page */
+} 
 .core-team-wrapper {
   cursor: default;
 }
 
-/* Entire card — pointer on hover */
 .core-team-wrapper .team-card {
   cursor: pointer;
 }
 
-/* Text inside card — I-beam only on exact letters */
 .core-team-wrapper .team-card .card-name,
 .core-team-wrapper .team-card .card-role,
 .core-team-wrapper .team-card .short-desc,
@@ -548,12 +516,11 @@
   cursor: text;
 }
 
-/* Keep pointer on all hover area except text */
+
 .core-team-wrapper .team-card:hover {
   cursor: pointer !important;
 }
 
-/* LinkedIn icon — always clickable */
 .core-team-wrapper .team-card .linkedin-icon,
 .core-team-wrapper .team-card .linkedin-icon svg {
   cursor: pointer !important;
