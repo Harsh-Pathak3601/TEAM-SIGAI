@@ -5,12 +5,12 @@ const JuniorTeam = () => {
   const cursorGlowRef = useRef(null);
 
   const teamMembers = [
-    { id: 1, name: 'Tiya Rai', role: 'Joint Secretary', imageUrl: '/Tiya.jpg', linkedin: 'https://www.linkedin.com/' },
-    { id: 2, name: 'Riya Yadav', role: 'Joint Event Manager', imageUrl: '/riya.jpg', linkedin: 'https://www.linkedin.com/' },
+    { id: 1, name: 'Tiya Rai', role: 'Joint Secretary', imageUrl: '/Tiya.jpg', linkedin: 'https://www.linkedin.com/in/tiya-rai-433b42368?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+    { id: 2, name: 'Riya Yadav', role: 'Joint Event Manager', imageUrl: '/riya.jpg', linkedin: 'https://www.linkedin.com/in/riya-yadav-5aa7b5369' },
     { id: 3, name: 'Bala Sudalaimuthu', role: 'Joint Technical Head', imageUrl: '/bala.jpg', linkedin: 'https://www.linkedin.com/in/bala-sudalaimuthu-a34b53355/' },
-    { id: 4, name: 'Parag Valam', role: 'Joint Creative Head', imageUrl: '/parag.jpg', linkedin: 'https://www.linkedin.com/' },
-    { id: 5, name: 'Vipul Choudhary', role: 'Joint PR & Sponsorship Head', imageUrl: '/Vipul.jpg', linkedin: 'https://www.linkedin.com/' },
-    { id: 6, name: 'Pranav Vishwakarma', role: 'Inhouse Head', imageUrl: '/Pranav.jpg', linkedin: 'https://www.linkedin.com/' },
+    { id: 4, name: 'Parag Valam', role: 'Joint Creative Head', imageUrl: '/parag.jpg', linkedin: 'https://www.linkedin.com/in/parag-valam-790894368?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+    { id: 5, name: 'Vipul Choudhary', role: 'Joint PR & Sponsorship Head', imageUrl: '/Vipul.jpg', linkedin: 'https://www.linkedin.com/in/' },
+    { id: 6, name: 'Pranav Vishwakarma', role: 'Inhouse Head', imageUrl: '/Pranav.jpg', linkedin: 'https://www.linkedin.com/in/pranav-vishwakarma-ba679928a' },
   ];
 
   useEffect(() => {
@@ -129,7 +129,6 @@ const JuniorTeam = () => {
 
   return (
     <>
-      {/* FIX: Remove unwanted top/bottom gaps & add cursor defaults */}
       <style>{`
         .junior-team-section {
           min-height: auto !important;

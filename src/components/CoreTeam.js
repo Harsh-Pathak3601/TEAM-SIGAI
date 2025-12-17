@@ -1,10 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
-/* -----------------------------
-   teamData (single array, chairperson first)
------------------------------ */
 const teamData = [
   {
     name: "Rishikesh Saroj",
@@ -12,7 +8,7 @@ const teamData = [
     shortDesc: "Meet our exceptional Chairperson, Rishikesh Saroj! Rishikesh leads...",
     longDesc: "Rishikesh leads the committee with clarity and strong decision-making. He keeps the team united while ensuring smooth coordination. His guidance constantly pushes the committee toward excellence.",
     image: "Rishikesh.png",
-    linkedin: "https://linkedin.com/in/#"
+    linkedin: "https://in.linkedin.com/in/rishikesh-saroj-107a89326"
   },
   {
     name: "Ishan Dubey",
@@ -87,10 +83,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/krish-vanani-445655260?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   }
 ];
-
-/* -----------------------------
-   TeamCard Component
------------------------------ */
+// Team Card Component
 const TeamCard = ({
   member,
   isChairperson = false,
@@ -161,9 +154,7 @@ const TeamCard = ({
   );
 };
 
-/* -----------------------------
-   CoreTeam Component
------------------------------ */
+// Main CoreTeam Component
 export default function CoreTeam() {
   const chairperson = teamData[0];
   const others = teamData.slice(1);
