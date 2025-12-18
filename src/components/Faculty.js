@@ -17,11 +17,9 @@ const LinkedInIcon = () => (
 
 // --- Detailed Faculty Card Component ---
 // This component matches the design from your image
-const FacultyCard = ({ title, imageUrl, name, role, description }) => (
+const FacultyCard = ({ title, imageUrl, name, role, description , linkedinUrl}) => (
   <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 md:p-8 shadow-2xl shadow-blue-500/20 w-full max-w-5xl mx-auto backdrop-blur-sm bg-opacity-80 h-full cursor-default">
-    {/* ⛔ Removed ONLY this part causing huge blank space:
-        min-h-[50rem] md:min-h-[38rem]
-    */}
+    
 
     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start h-full cursor-default">
       
@@ -38,9 +36,16 @@ const FacultyCard = ({ title, imageUrl, name, role, description }) => (
         <h3 className="text-xl md:text-2xl font-bold text-white mt-5 cursor-text">{name}</h3>
         <p className="text-sm md:text-base text-gray-400 cursor-text">{role}</p>
 
-        <a href="#" aria-label={`${name}'s LinkedIn Profile`} className="mt-4">
-          <LinkedInIcon />
-        </a>
+        <a
+       href={linkedinUrl}
+       target="_blank"
+       rel="noopener noreferrer"
+      aria-label={`${name}'s LinkedIn Profile`}
+       className="mt-4"
+      >
+     <LinkedInIcon />
+    </a>
+
       </div>
       
       {/* Right Column: Title and Description */}
@@ -66,6 +71,7 @@ export default function App() {
     imageUrl: "Shiwani_Mam.jpg",
     name: "Dr. Shiwani Gupta",
     role: "HOD of Department",
+     linkedinUrl: "https://www.linkedin.com/in/dr-shiwani-gupta-9b731a53?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     description:
       "Dr. Shiwani Gupta, the HOD of the Department of Artificial Intelligence and Machine Learning (AIML), is a dedicated educator with over 20 years of experience in academia. She holds a Ph.D. in Technology from Mumbai University, where her doctorate research includes significant contributions in Machine Learning and AI applications. Her work has been widely published, including studies on online signature recognition, healthcare optimization using machine learning, and advanced feature selection algorithms for heart disease datasets in prestigious journals and IEEE conferences. Dr. Gupta's commitment to accessible learning and research excellence has made her a driving force in fostering institutional growth and innovation through roles like Infosys Campus Connect Trainer and R&D Coordinator."
   };
@@ -75,6 +81,7 @@ export default function App() {
     imageUrl: "pranjali.jpg",
     name: "Pranjali Sankhe",
     role: "Assistant Professor",
+     linkedinUrl: "https://www.linkedin.com/in/pranjali-sankhe-5421aa160?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     description:
       "Mrs. Pranjali Sankhe, the faculty in charge of the TCET ACM SIGAI Committee, specializes in Machine Learning, Computer Networking, and Security. With experience as a trainer at the Central Bank of India for Computer Networking and Cybersecurity, she has also completed certifications from Infosys Springboard and Microsoft. Her research contributions include publications on chronic disease prediction, image cryptography, and motion capture visualization in prominent conferences such as IEEE and IC-ICN. Passionate about advancing intelligent computing, Mrs. Sankhe actively engages in academic research and professional development in emerging technologies."
   };
@@ -92,6 +99,7 @@ export default function App() {
           name={facultySponsor.name}
           role={facultySponsor.role}
           description={facultySponsor.description}
+           linkedinUrl={facultySponsor.linkedinUrl}
         />
 
         <FacultyCard
@@ -100,6 +108,7 @@ export default function App() {
           name={facultyInChargePranjali.name}
           role={facultyInChargePranjali.role}
           description={facultyInChargePranjali.description}
+           linkedinUrl={facultyInChargePranjali.linkedinUrl}
         />
 
       </div>
