@@ -68,17 +68,18 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2">
                 <MapPin size={18} />
-                <span className="text-gray-300">Thakur College, Mumbai</span>
+                <span className="text-gray-300">Thakur Village, Kandivali East,
+Mumbai - 400101</span>
               </li>
 
               <li className="flex items-center gap-2">
                 <Mail size={18} />
-                <span className="text-gray-300">sigai@tcet.ac.in</span>
+                <span className="text-gray-300">acmsigai10@gmail.com</span>
               </li>
 
               <li className="flex items-center gap-2">
                 <Phone size={18} />
-                <span className="text-gray-300">+91 12345 67890</span>
+                <span className="text-gray-300">022-28461891</span>
               </li>
             </ul>
           </div>
