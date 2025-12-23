@@ -195,8 +195,8 @@ const HeroSection = () => {
 
           <p>
             We are a community of innovators exploring the world of Artificial
-            Intelligence, Machine Learning, and Human–Computer Interaction. <br />
-            Our mission is to bridge creativity with technology — crafting
+            Intelligence, Machine Learning, and Human Computer Interaction. <br />
+            Our mission is to bridge creativity with technology crafting
             solutions that make intelligence truly interactive.
           </p>
         </div>
