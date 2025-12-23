@@ -24,7 +24,7 @@ const HeroSection = () => {
           align-items: center;
           justify-content: space-between;
           overflow: hidden;
-          padding: 80px 120px;
+          padding: 160px 120px 80px 120px;
           cursor: default;
         }
 
@@ -139,7 +139,7 @@ const HeroSection = () => {
         /* MOBILE */
         @media (max-width: 768px) {
           .hero-robot-section {
-            padding: 40px 20px;
+            padding: 120px 20px 40px 20px;
           }
 
           .hero-robot {

@@ -1,123 +1,116 @@
-import React from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 
-export default function Footer() {
+export const Footer = () => {
   return (
-    <>
-      {/* Cursor Fixes */}
-      <style>{`
-        footer {
-          cursor: default !important;
-        }
-        footer p,
-        footer span,
-        footer h3,
-        footer li {
-          cursor: text !important;
-        }
-        footer a,
-        footer svg {
-          cursor: pointer !important;
-        }
-      `}</style>
+    <footer className="bg-background border-t border-border/30 py-12 px-8 cursor-auto">
+      {/* Map Section */}
+      <div className="mapcontainer w-full flex justify-center py-10 bg-background cursor-auto">
+        <div className="w-[90%] md:w-[80%] lg:w-[70%] overflow-hidden rounded-2xl shadow-lg border border-border cursor-auto">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2685.807415056768!2d72.87278298331742!3d19.20637003525048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b0e57647569d%3A0xc0aec329c82d3555!2sThakur%20College%20of%20Engineering%20and%20Technology!5e0!3m2!1sen!2sin!4v1725606742168!5m2!1sen!2sin"
+            className="w-full h-[250px] sm:h-[300px] md:h-[350px] border-0 hover:scale-105 duration-500 transition-transform cursor-auto"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Thakur College of Engineering and Technology Map"
+          ></iframe>
+        </div>
+      </div>
 
-      <footer className="bg-[#0a0a0a] text-white pt-10 pb-16">
-        
-        {/* MAP SECTION */}
-        <div className="w-full flex justify-center px-4">
-          <div className="w-[90%] md:w-[80%] lg:w-[70%] rounded-2xl overflow-hidden shadow-xl">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2685.807415056768!2d72.87278298331742!3d19.20637003525048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b0e57647569d%3A0xc0aec329c82d3555!2sThakur%20College%20of%20Engineering%20and%20Technology!5e0!3m2!1sen!2sin!4v1725606742168!5m2!1sen!2sin"
-              className="w-full h-[300px] md:h-[360px] lg:h-[400px] border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="TCET Map"
-            ></iframe>
-          </div>
+      {/* Footer Columns */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 cursor-auto">
+        {/* Column 1 */}
+        <div>
+          <h3 className="text-lg font-bold mb-4 cursor-text">ACM SIGAI TCET</h3>
+          <p className="text-sm text-foreground/70 leading-relaxed cursor-text">
+            Special Interest Group on Artificial Intelligence at Thakur College of Engineering and Technology
+          </p>
         </div>
 
-        {/* FOOTER CONTENT */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mt-12 px-6">
-          
-          {/* Column 1 */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">ACM SIGAI TCET</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Special Interest Group on Artificial Intelligence at Thakur College
-              of Engineering and Technology
-            </p>
-          </div>
-
-          {/* Column 2 */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Pages</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/" className="text-gray-300 hover:text-white">Home</a></li>
-              <li><a href="/events" className="text-gray-300 hover:text-white">Events</a></li>
-              <li><a href="#team" className="text-gray-300 hover:text-white">Team</a></li>
-              <li><a href="#publications" className="text-gray-300 hover:text-white">Publications</a></li>
-              <li><a href="#blogs" className="text-gray-300 hover:text-white">Blogs</a></li>
-            </ul>
-          </div>
-
-          {/* Column 3 */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Contact</h3>
-
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <MapPin size={18} />
-                <span className="text-gray-300">Thakur Village, Kandivali East,
-Mumbai - 400101</span>
-              </li>
-
-              <li className="flex items-center gap-2">
-                <Mail size={18} />
-                <span className="text-gray-300">acmsigai10@gmail.com</span>
-              </li>
-
-              <li className="flex items-center gap-2">
-                <Phone size={18} />
-                <span className="text-gray-300">022-28461891</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4 */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
-            <div className="flex items-center gap-3">
-              
-              <a
-                href="https://www.instagram.com/tcet_acm.sigai?igsh=aHI0aXh4emQ4dmNp"
-                target="_blank"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-600 transition"
-              >
-                <FaInstagram size={20} />
+        {/* Column 2 */}
+        <div>
+          <h3 className="text-lg font-bold mb-4 cursor-text">Pages</h3>
+          <ul className="space-y-2 text-sm cursor-text">
+            <li>
+              <a href="https://acmsigai.tcetmumbai.in/" className="text-foreground/70 hover:text-accent transition-colors cursor-pointer">
+                Home
               </a>
-
-              <a
-                href="https://github.com/SIG-AI-OpenSource"
-                target="_blank"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-600 transition"
-              >
-                <FaGithub size={20} />
+            </li>
+            <li>
+              <a href="https://acmsigai.tcetmumbai.in/Events" className="text-foreground/70 hover:text-accent transition-colors cursor-pointer">
+                Events
               </a>
-
-              <a
-                href="https://www.linkedin.com/company/tcet-acm-sigai/"
-                target="_blank"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition"
-              >
-                <FaLinkedin size={20} />
+            </li>
+            <li>
+              <a href="https://acmsigai.tcetmumbai.in/Our-Team" className="text-foreground/70 hover:text-accent transition-colors cursor-pointer">
+                Team
               </a>
-
-            </div>
-          </div>
-
+            </li>
+            <li>
+              <a href="https://acmsigai.tcetmumbai.in/Publications" className="text-foreground/70 hover:text-accent transition-colors cursor-pointer">
+                Publications
+              </a>
+            </li>
+            <li>
+              <a href="https://acmsigai.tcetmumbai.in/Blogs" className="text-foreground/70 hover:text-accent transition-colors cursor-pointer">
+                Blogs
+              </a>
+            </li>
+          </ul>
         </div>
-      </footer>
-    </>
+
+        {/* Column 3 */}
+        <div>
+          <h3 className="text-lg font-bold mb-4 cursor-text">Contact</h3>
+          <ul className="space-y-3 text-sm cursor-text">
+            <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 cursor-auto" />
+              <span className="text-foreground/70 cursor-text">Thakur College, Mumbai</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail className="w-4 h-4 flex-shrink-0 cursor-auto" />
+              <span className="text-foreground/70 cursor-text">acmsigai10@gmail.com</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone className="w-4 h-4 flex-shrink-0 cursor-auto" />
+              <span className="text-foreground/70 cursor-text">+91 93265 90260</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 4 */}
+        <div>
+          <h3 className="text-lg font-bold mb-4 cursor-text">Follow Us</h3>
+          <div className="flex gap-3">
+            <a
+              href="https://www.instagram.com/tcet_acm.sigai?igsh=aHI0aXh4emQ4dmNp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-pink-500 transition-colors cursor-pointer"
+            >
+              <FaInstagram className="w-5 h-5" />
+            </a>
+            <a
+              href="https://github.com/SIG-AI-OpenSource"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer"
+            >
+              <FaGithub className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/tcet-acm-sigai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer"
+            >
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
-}
+};
+
+export default Footer;
