@@ -167,66 +167,69 @@ export default function CoreTeam() {
   const [devtoolsMode, setDevtoolsMode] = useState(false);
 
   /* Detect DevTools / Touch Emulation */
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+ useEffect(() => {
+  if (typeof window === "undefined") return;
 
-    const detect = () => {
-      const emulatedTouch = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
-      const dockedDevtools = (window.outerWidth - window.innerWidth) > 100;
-      const isChrome = navigator.userAgent.includes("Chrome");
+  const detect = () => {
+    const emulatedTouch =
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches;
 
-      setDevtoolsMode(Boolean((isChrome && emulatedTouch) || dockedDevtools));
-    };
+    const dockedDevtools =
+      (window.outerWidth - window.innerWidth) > 100;
 
-    detect();
-    window.addEventListener("resize", detect);
-    return () =>
-      window.removeEventListener("resize", detect);
-  }, []);
+    const isChrome = navigator.userAgent.includes("Chrome");
 
-  /* Handlers */
-  const makeHandlers = (name) => {
-    if (devtoolsMode) {
-      return {
-        onClick: (e) => {
-          e.stopPropagation?.();
-          setActiveCard((prev) => (prev === name ? null : name));
-        },
-        onKeyDown: (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setActiveCard((prev) => (prev === name ? null : name));
-          }
-        }
-      };
-    }
+    setDevtoolsMode(Boolean((isChrome && emulatedTouch) || dockedDevtools));
+  };
 
+  detect();
+  window.addEventListener("resize", detect);
+  return () => window.removeEventListener("resize", detect);
+}, []);
+
+/* Handlers */
+const makeHandlers = (name) => {
+  if (devtoolsMode) {
     return {
-      onPointerEnter: () => setActiveCard(name),
-      onPointerLeave: () => setActiveCard(null),
-
-      onTouchStart: (e) => {
-        e.preventDefault?.();
-        setActiveCard(name);
-      },
-
-      onTouchEnd: () => setActiveCard(null),
-
-      onFocus: () => setActiveCard(name),
-      onBlur: () => setActiveCard(null),
-
       onClick: (e) => {
         e.stopPropagation?.();
-        setActiveCard(name);
+        setActiveCard((prev) => (prev === name ? null : name));
       },
       onKeyDown: (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          setActiveCard(name);
+          setActiveCard((prev) => (prev === name ? null : name));
         }
       }
     };
+  }
+
+  return {
+    onPointerEnter: () => setActiveCard(name),
+    onPointerLeave: () => setActiveCard(null),
+
+    onTouchStart: () => {
+      setActiveCard(name);
+    },
+
+    onTouchEnd: () => setActiveCard(null),
+
+    onFocus: () => setActiveCard(name),
+    onBlur: () => setActiveCard(null),
+
+    onClick: (e) => {
+      e.stopPropagation?.();
+      setActiveCard(name);
+    },
+    onKeyDown: (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setActiveCard(name);
+      }
+    }
   };
+};
 
   return (
     <div className="core-team-wrapper">
