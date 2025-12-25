@@ -470,12 +470,10 @@
   cursor: pointer;
 }
 
-.core-team-wrapper .team-card .card-name,
-.core-team-wrapper .team-card .card-role,
-.core-team-wrapper .team-card .short-desc,
-.core-team-wrapper .team-card .long-desc {
-  cursor: text;
+.core-team-wrapper .team-card * {
+  cursor: inherit;
 }
+
 
 
 .core-team-wrapper .team-card:hover {

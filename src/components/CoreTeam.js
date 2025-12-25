@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 const teamData = [
   {
+    id : "chairperson",
     name: "Rishikesh Saroj",
     role: "Chairperson",
     shortDesc: "Meet our exceptional Chairperson, Rishikesh Saroj! Rishikesh leads...",
@@ -11,6 +12,7 @@ const teamData = [
     linkedin: "https://in.linkedin.com/in/rishikesh-saroj-107a89326"
   },
   {
+    id: "vice-chairperson",
     name: "Ishan Dubey",
     role: "Vice - Chairperson",
     shortDesc: "Meet our outstanding Vice Chairperson, Ishan Dubey! Ishan ensures....",
@@ -19,6 +21,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/ishan-dubey-a45378322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "event-manager",
     name: "Taran Shetty",
     role: "Event Manager",
     shortDesc: "Meet our brilliant Event Manager, Taran Shetty! Taran plans ...",
@@ -27,6 +30,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/taran-shetty?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "technical-head",
     name: "Anuj Singh",
     role: "Technical Head",
     shortDesc: "Meet our skilled Technical Head, Anuj Singh! Anuj leads...",
@@ -35,6 +39,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/anujsingh-ai-ml?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "secretary",
     name: "Mudassir Shaikh",
     role: "Secretary",
     shortDesc: "Meet our dedicated Secretary, Mudassir Shaikh! Mudassir manages...",
@@ -43,6 +48,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/mudassir-shaikh-292a42286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "sponsorship-head",
     name: "Dev Tripati",
     role: "Sponsorship Head",
     shortDesc: "Meet our dynamic Sponsorship Head, Dev Tripathi! Dev secures...",
@@ -51,6 +57,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/dev-tripathi-1b285328a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "webmaster",
     name: "Kartik Bankar",
     role: "Webmaster",
     shortDesc: "Meet our talented Webmaster, Kartik Bankar! With his...",
@@ -59,6 +66,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/kartikbankar21?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "treasurer",
     name: "Reva Purohit",
     role: "Treasurer",
     shortDesc: "Meet our responsible Treasurer, Reva Purohit! Reva manages finances...",
@@ -67,6 +75,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/reva-purohit-336a88355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "pr-head",
     name: "Aniket Bhaskar",
     role: "Public Relation Head",
     shortDesc: "Meet our charismatic PR Head, Aniket Bhaskar! Aniket maintains ...",
@@ -75,6 +84,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/aniket-bhaskar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
   },
   {
+    id: "creative-head",
     name: "Krish Vanani",
     role: "Creative Head",
     shortDesc: "Introducing the creative powerhouse of ACM SIGAI,Krish Vanani...",
@@ -189,47 +199,42 @@ export default function CoreTeam() {
 }, []);
 
 /* Handlers */
-const makeHandlers = (name) => {
+const makeHandlers = (id) => {
   if (devtoolsMode) {
     return {
       onClick: (e) => {
         e.stopPropagation?.();
-        setActiveCard((prev) => (prev === name ? null : name));
+        setActiveCard((prev) => (prev === id ? null : id));
       },
       onKeyDown: (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          setActiveCard((prev) => (prev === name ? null : name));
+          setActiveCard((prev) => (prev === id ? null : id));
         }
       }
     };
   }
 
   return {
-    onPointerEnter: () => setActiveCard(name),
+    onPointerEnter: () => setActiveCard(id),
     onPointerLeave: () => setActiveCard(null),
-
-    onTouchStart: () => {
-      setActiveCard(name);
-    },
-
+    onTouchStart: () => setActiveCard(id),
     onTouchEnd: () => setActiveCard(null),
-
-    onFocus: () => setActiveCard(name),
+    onFocus: () => setActiveCard(id),
     onBlur: () => setActiveCard(null),
-
     onClick: (e) => {
       e.stopPropagation?.();
-      setActiveCard(name);
+      setActiveCard(id);
     },
     onKeyDown: (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        setActiveCard(name);
+        setActiveCard(id);
       }
     }
   };
 };
+
 
   return (
     <div className="core-team-wrapper">
@@ -245,8 +250,9 @@ const makeHandlers = (name) => {
             <TeamCard
               member={chairperson}
               isChairperson={true}
-              hovered={activeCard === chairperson.name}
-              {...makeHandlers(chairperson.name)}
+             hovered={activeCard === chairperson.id}
+             {...makeHandlers(chairperson.id)}
+
             />
           </div>
 
@@ -254,34 +260,36 @@ const makeHandlers = (name) => {
           <div id="grid-3x3-container">
             <div className="team-column grid-column" role="list">
               {gridCol1.map((member) => (
-                <TeamCard
-                  key={member.name}
-                  member={member}
-                  hovered={activeCard === member.name}
-                  {...makeHandlers(member.name)}
-                />
+               <TeamCard
+  key={member.id}
+  member={member}
+  hovered={activeCard === member.id}
+  {...makeHandlers(member.id)}
+/>
+
               ))}
             </div>
 
             <div className="team-column grid-column" role="list">
               {gridCol2.map((member) => (
-                <TeamCard
-                  key={member.name}
-                  member={member}
-                  hovered={activeCard === member.name}
-                  {...makeHandlers(member.name)}
-                />
+               <TeamCard
+  key={member.id}
+  member={member}
+  hovered={activeCard === member.id}
+  {...makeHandlers(member.id)}
+/>
+
               ))}
             </div>
 
             <div className="team-column grid-column" role="list">
               {gridCol3.map((member) => (
                 <TeamCard
-                  key={member.name}
-                  member={member}
-                  hovered={activeCard === member.name}
-                  {...makeHandlers(member.name)}
-                />
+  key={member.id}
+  member={member}
+  hovered={activeCard === member.id}
+  {...makeHandlers(member.id)}
+/>
               ))}
             </div>
           </div>
@@ -290,54 +298,54 @@ const makeHandlers = (name) => {
           <div className="team-column mobile-only-column">
             <TeamCard
               member={teamData.find(m => m.role === "Vice - Chairperson")}
-              hovered={activeCard === "Ishan Dubey"}
-              {...makeHandlers("Ishan Dubey")}
+              hovered={activeCard === "vice-chairperson"}
+              {...makeHandlers("vice-chairperson")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Secretary")}
-              hovered={activeCard === "Mudassir Shaikh"}
-              {...makeHandlers("Mudassir Shaikh")}
+              hovered={activeCard === "secretary"}
+              {...makeHandlers("secretary")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Treasurer")}
-              hovered={activeCard === "Reva Purohit"}
-              {...makeHandlers("Reva Purohit")}
+              hovered={activeCard === "treasurer"}
+              {...makeHandlers("treasurer")}
             />
           </div>
 
           <div className="team-column mobile-only-column">
             <TeamCard
               member={teamData.find(m => m.role === "Event Manager")}
-              hovered={activeCard === "Taran Shetty"}
-              {...makeHandlers("Taran Shetty")}
+              hovered={activeCard === "event-manager"}
+              {...makeHandlers("event-manager")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Sponsorship Head")}
-              hovered={activeCard === "Dev Tripati"}
-              {...makeHandlers("Dev Tripati")}
+              hovered={activeCard === "sponsorship-head"}
+              {...makeHandlers("sponsorship-head")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Public Relation Head")}
-              hovered={activeCard === "Aniket Bhaskar"}
-              {...makeHandlers("Aniket Bhaskar")}
+              hovered={activeCard === "pr-head"}
+              {...makeHandlers("pr-head")}
             />
           </div>
 
           <div className="team-column mobile-only-column">
             <TeamCard
               member={teamData.find(m => m.role === "Technical Head")}
-              hovered={activeCard === "Anuj Singh"}
-              {...makeHandlers("Anuj Singh")}
+              hovered={activeCard === "technical-head"}
+              {...makeHandlers("technical-head")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Webmaster")}
-              hovered={activeCard === "Kartik Bankar"}
-              {...makeHandlers("Kartik Bankar")}
+              hovered={activeCard === "webmaster"}
+              {...makeHandlers("webmaster")}
             />
             <TeamCard
               member={teamData.find(m => m.role === "Creative Head")}
-              hovered={activeCard === "Krish Vanani"}
-              {...makeHandlers("Krish Vanani")}
+              hovered={activeCard === "creative-head"}
+              {...makeHandlers("creative-head")}
             />
           </div>
 
