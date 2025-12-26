@@ -112,13 +112,14 @@ const TeamCard = ({
   return (
     <div
       className={`team-card ${isChairperson ? 'chairperson-card' : ''} ${hovered ? 'is-hovered' : ''}`}
-    onPointerEnter={onPointerEnter}
-onPointerLeave={onPointerLeave}
-onClick={onClick}
-onKeyDown={onKeyDown}
-onFocus={onFocus}
-onBlur={onBlur}
-
+      onMouseEnter={onPointerEnter}
+      onMouseLeave={onPointerLeave}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
       role="button"
       tabIndex={0}
       aria-expanded={hovered}
@@ -179,17 +180,17 @@ export default function CoreTeam() {
  useEffect(() => {
   if (typeof window === "undefined") return;
 
-  let last = false;
-
   const detect = () => {
-    const isOpen =
-      Math.abs(window.outerWidth - window.innerWidth) > 160 ||
-      Math.abs(window.outerHeight - window.innerHeight) > 160;
+    const emulatedTouch =
+      window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches;
 
-    if (isOpen !== last) {
-      last = isOpen;
-      setDevtoolsMode(isOpen);
-    }
+    const dockedDevtools =
+      (window.outerWidth - window.innerWidth) > 100;
+
+    const isChrome = navigator.userAgent.includes("Chrome");
+
+    setDevtoolsMode(Boolean((isChrome && emulatedTouch) || dockedDevtools));
   };
 
   detect();
@@ -197,24 +198,18 @@ export default function CoreTeam() {
   return () => window.removeEventListener("resize", detect);
 }, []);
 
-useEffect(() => {
-  if (devtoolsMode) {
-    setActiveCard(null);
-  }
-}, [devtoolsMode]);
-
-
 /* Handlers */
 const makeHandlers = (id) => {
   if (devtoolsMode) {
     return {
-      onClick: () => {
-        setActiveCard(prev => (prev === id ? null : id));
+      onClick: (e) => {
+        e.stopPropagation?.();
+        setActiveCard((prev) => (prev === id ? null : id));
       },
       onKeyDown: (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          setActiveCard(prev => (prev === id ? null : id));
+          setActiveCard((prev) => (prev === id ? null : id));
         }
       }
     };
@@ -222,23 +217,15 @@ const makeHandlers = (id) => {
 
   return {
     onPointerEnter: () => setActiveCard(id),
-
-    onPointerLeave: () => {
-      setActiveCard(prev => (prev === id ? null : prev));
-    },
-
-    onClick: () => {
-      setActiveCard(prev => (prev === id ? prev : id));
-    },
-
+    onPointerLeave: () => setActiveCard(null),
+    onTouchStart: () => setActiveCard(id),
+    onTouchEnd: () => setActiveCard(null),
     onFocus: () => setActiveCard(id),
-
-    onBlur: (e) => {
-      if (!e.currentTarget.contains(e.relatedTarget)) {
-        setActiveCard(null);
-      }
+    onBlur: () => setActiveCard(null),
+    onClick: (e) => {
+      e.stopPropagation?.();
+      setActiveCard(id);
     },
-
     onKeyDown: (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
